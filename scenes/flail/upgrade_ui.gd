@@ -5,7 +5,7 @@ const _FLAIL_GROUP := &"flailball"
 const _FLAIL := preload("res://scenes/flail/flail_ball.tscn")
 
 @export var speedup_delta: float = PI
-@export var default_flail_speed: float = PI
+@export var default_flail_speed: float = TAU / 4
 @export var max_flail_levels: int = 8
 @export var flail_nested_length_ratio: float = 0.9
 @export var flail_initial_length: float = 100.0
@@ -55,6 +55,7 @@ func start_upgrade_sequence(new_flails: int, speedups: int) -> void:
 	_button_speedup.disabled = _budget_speedups == 0
 	_button_new_flail.disabled = _budget_new_flails == 0
 
+	_reset_buttons()
 	_button_change_dir.button_pressed = true
 
 	# player is upgrading...
@@ -133,8 +134,6 @@ func _do_upgrade() -> void:
 	else:
 		# nothing is selected somehow??
 		push_error("trying to upgrade by no mode is selected")
-		pass
-
 
 
 func _do_change_dir(flail: FlailBall) -> void:
@@ -160,6 +159,7 @@ func _do_speedup(flail: FlailBall) -> void:
 	_budget_speedups -= 1
 	if _budget_speedups <= 0:
 		_button_speedup.disabled = true
+		_reset_buttons()
 		_button_change_dir.button_pressed = true
 
 
@@ -195,4 +195,11 @@ func _do_add_flail(flail: FlailBall) -> void:
 	_budget_new_flails -= 1
 	if _budget_new_flails <= 0:
 		_button_new_flail.disabled = true
+		_reset_buttons()
 		_button_change_dir.button_pressed = true
+
+
+func _reset_buttons() -> void:
+	_button_change_dir.set_pressed_no_signal(false)
+	_button_new_flail.set_pressed_no_signal(false)
+	_button_speedup.set_pressed_no_signal(false)

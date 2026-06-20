@@ -21,6 +21,7 @@ position = Vector2(0, -19)
 
 [node name="FlailBall2" parent="Player/FlailSet" unique_id=2025905012 node_paths=PackedStringArray("parent") instance=ExtResource("3_qjeyg")]
 position = Vector2(59, 57)
+rotation_speed = 1.571
 radius = 100.0
 parent = NodePath("../RootFlail")
 
