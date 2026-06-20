@@ -25,5 +25,9 @@ radius = 40.0
 parent = NodePath("../FlailBall2")
 
 [node name="Enemy" parent="." unique_id=1871860269 instance=ExtResource("3_65iv0")]
-position = Vector2(568, 158)
+position = Vector2(224, 153)
 target = NodePath("../FlailSet/FlailBall3")
+knockback_velocity = Vector2(300, 0)
+knockback_fading = 200.0
+
+[connection signal="mouse_entered" from="Enemy" to="Enemy" method="_on_mouse_entered"]
