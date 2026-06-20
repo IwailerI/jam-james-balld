@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://bfyp56ixalhlr"]
+
+[ext_resource type="PackedScene" uid="uid://mqufp14bsu2u" path="res://scenes/player/player.tscn" id="1_ruvwk"]
+[ext_resource type="Script" uid="uid://buuegih5ba168" path="res://scenes/flail/flailset.gd" id="2_jinhd"]
+[ext_resource type="PackedScene" uid="uid://btfpk2cklm2nr" path="res://scenes/flail/flail_ball.tscn" id="3_0joms"]
+[ext_resource type="PackedScene" uid="uid://bwust5e26nd8q" path="res://scenes/game_manager/game_manager.tscn" id="4_g3tec"]
+[ext_resource type="Script" uid="uid://ddc45eylgdqsm" path="res://resources/wave.gd" id="5_tvffb"]
+[ext_resource type="Script" uid="uid://b0n51pgglqvsh" path="res://resources/wave_enemy_entry.gd" id="6_5g7mh"]
+[ext_resource type="PackedScene" uid="uid://gbsgy7a03y4m" path="res://scenes/enemy/enemy.tscn" id="7_p378r"]
+[ext_resource type="PackedScene" uid="uid://bqmaaklxptuwx" path="res://scenes/shooting_enemy/shooting_enemy.tscn" id="8_kcb62"]
+
+[sub_resource type="Resource" id="Resource_rnaij"]
+script = ExtResource("6_5g7mh")
+enemy_scene = ExtResource("7_p378r")
+metadata/_custom_type_script = "uid://b0n51pgglqvsh"
+
+[sub_resource type="Resource" id="Resource_h3xc6"]
+script = ExtResource("6_5g7mh")
+enemy_scene = ExtResource("8_kcb62")
+price = 10
+metadata/_custom_type_script = "uid://b0n51pgglqvsh"
+
+[sub_resource type="Resource" id="Resource_s36qc"]
+script = ExtResource("5_tvffb")
+price_list = Array[ExtResource("6_5g7mh")]([SubResource("Resource_rnaij"), SubResource("Resource_h3xc6")])
+metadata/_custom_type_script = "uid://ddc45eylgdqsm"
+
+[sub_resource type="Resource" id="Resource_6qxox"]
+script = ExtResource("5_tvffb")
+price_list = Array[ExtResource("6_5g7mh")]([SubResource("Resource_rnaij"), SubResource("Resource_h3xc6")])
+budget = 500
+metadata/_custom_type_script = "uid://ddc45eylgdqsm"
+
+[node name="TestScene" type="Node2D" unique_id=988521978]
+
+[node name="Player" parent="." unique_id=656747177 instance=ExtResource("1_ruvwk")]
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=710772741]
+
+[node name="FlailSet" type="Node2D" parent="Player" unique_id=860355327]
+script = ExtResource("2_jinhd")
+metadata/_custom_type_script = "uid://buuegih5ba168"
+
+[node name="RootFlail" parent="Player/FlailSet" unique_id=1956772644 instance=ExtResource("3_0joms")]
+position = Vector2(0, -19)
+
+[node name="FlailBall2" parent="Player/FlailSet" unique_id=2025905012 node_paths=PackedStringArray("parent") instance=ExtResource("3_0joms")]
+position = Vector2(59, 57)
+radius = 60.0
+parent = NodePath("../RootFlail")
+
+[node name="GameManager" parent="." unique_id=559716171 instance=ExtResource("4_g3tec")]
+waves = Array[ExtResource("5_tvffb")]([SubResource("Resource_s36qc")])
+eternal_wave = SubResource("Resource_6qxox")

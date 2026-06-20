@@ -10,6 +10,7 @@ class SpawnEntry:
 @export var spawn_radius: float = 500.0
 @export var waves: Array[Wave]
 @export var eternal_wave: Wave
+@export var eternal_wave_budget_multiplier: float = 1.25
 
 var _cur_wave_idx: int = 0
 
@@ -53,12 +54,15 @@ func _spawn_enemy(enemy_scene: PackedScene) -> void:
 
 func _load_cur_wave() -> void:
 	if _cur_wave_idx >= waves.size():
-		# TODO: change eternal waves incrementaly
+		if _cur_wave_idx != waves.size(): # not modify the first instance of the eternal wave
+			eternal_wave.budget = int(eternal_wave.budget * eternal_wave_budget_multiplier)
+
 		_load_wave(eternal_wave);
-		print("wave #", _cur_wave_idx, " started (eternal wave)")
 	else:
 		_load_wave(waves[_cur_wave_idx])
-		print("wave #", _cur_wave_idx, " started")
+
+	print("[wave #%s started %s] duration: %s, budget: %s, enemies spawned: %s" %
+		[_cur_wave_idx, ("(eternal wave)" if _cur_wave_idx >= waves.size() else ""), _cur_wave.duration, _cur_wave.budget, _spawn_entries.size()])
 
 
 func _load_wave(wave: Wave) -> void:
