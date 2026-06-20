@@ -2,11 +2,6 @@ class_name GameManager
 extends Node
 
 
-class SpawnEntry:
-	var ticks_offset: int
-	var enemy_scene: PackedScene
-
-
 @export var spawn_radius: float = 500.0
 @export var waves: Array[Wave]
 @export var eternal_wave: Wave
@@ -24,11 +19,11 @@ func _ready() -> void:
 	_load_cur_wave()
 
 
-func _process(_delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	var cur_ticks := Time.get_ticks_usec()
 
 	if _cur_spawn_entry_idx >= _spawn_entries.size():
-		if cur_ticks < _cur_wave_start_ticks + _cur_wave.duration * 1000000:
+		if cur_ticks < _cur_wave_start_ticks + int(_cur_wave.duration * 1000000):
 			return
 
 		_cur_wave_idx += 1
@@ -77,16 +72,21 @@ func _generate_spawn_entries(wave: Wave) -> Array[SpawnEntry]:
 	var ret: Array[SpawnEntry] = []
 	var price_list_sorted := wave.price_list.duplicate()
 
-	price_list_sorted.sort_custom(func(a: WaveEnemyEntry, b: WaveEnemyEntry) -> bool: return a.price <= b.price)
+	price_list_sorted.sort_custom(
+		func(a: WaveEnemyEntry, b: WaveEnemyEntry) -> bool:
+			return a.price <= b.price
+	)
 
 	while budget_left > 0:
 		var affordable_price_sum: int = 0
 		for e: WaveEnemyEntry in price_list_sorted:
-			if e.price > budget_left: break
+			if e.price > budget_left:
+				break
 			assert(e.price > 0)
 			affordable_price_sum += e.price
 
-		if affordable_price_sum == 0: break
+		if affordable_price_sum == 0:
+			break
 
 		var rand_num: float = randf_range(0, 1)
 		var accum: float = 0
@@ -106,6 +106,14 @@ func _generate_spawn_entries(wave: Wave) -> Array[SpawnEntry]:
 
 		ret.append(spawn_entry)
 
-	ret.sort_custom(func(a: SpawnEntry, b: SpawnEntry) -> bool: return a.ticks_offset <= b.ticks_offset)
+	ret.sort_custom(
+		func(a: SpawnEntry, b: SpawnEntry) -> bool:
+			return a.ticks_offset <= b.ticks_offset
+	)
 
 	return ret
+
+
+class SpawnEntry:
+	var ticks_offset: int
+	var enemy_scene: PackedScene
