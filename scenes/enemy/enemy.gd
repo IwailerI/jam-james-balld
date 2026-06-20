@@ -1,11 +1,13 @@
 class_name Enemy
 extends CharacterBody2D
 
+
 @export var speed: float = 120.0
 @export var target: NodePath
 @export var damage: int = 10
 @export var knockback_velocity: Vector2
 @export var damage_tick_interval: float = 0.5
+@export var knockback_fading: float
 
 var player: Player
 var _is_touching_player: bool = false
@@ -20,6 +22,7 @@ func _ready() -> void:
 
 	if not target.is_empty():
 		player = get_node(target)
+	
 
 
 func _physics_process(delta: float) -> void:
@@ -30,6 +33,7 @@ func _physics_process(delta: float) -> void:
 	
 	velocity = direction * speed
 	velocity += knockback_velocity
+	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_fading * delta)
 	
 	move_and_slide()
 	
