@@ -21,15 +21,15 @@ func _ready() -> void:
 	dmg_area.body_exited.connect(_on_dmg_body_exited)
 
 	if not target.is_empty():
-		player = get_node(target)	
+		player = get_node(target)
 
 
 func _physics_process(delta: float) -> void:
 	if not player:
 		return
-	
+
 	var direction: Vector2 = (player.global_position - global_position).normalized()
-	
+
 	if (player.global_position - global_position).length_squared() >= 2:
 		velocity = direction * speed
 	else:
@@ -37,9 +37,9 @@ func _physics_process(delta: float) -> void:
 
 	velocity += knockback_velocity
 	knockback_velocity = knockback_velocity.move_toward(Vector2.ZERO, knockback_fading * delta)
-	
+
 	move_and_slide()
-	
+
 	if velocity.length() > 0:
 		rotation = velocity.angle()
 
