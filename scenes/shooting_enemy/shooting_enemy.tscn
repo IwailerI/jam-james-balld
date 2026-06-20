@@ -12,6 +12,7 @@ collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_1tsq5")
 bullet_scene = ExtResource("2_skcip")
+metadata/_edit_group_ = true
 
 [node name="HealthComponent" parent="." unique_id=1186933908 instance=ExtResource("2_y3uhc")]
 
@@ -24,3 +25,6 @@ texture = ExtResource("3_g2er0")
 
 [node name="ShootingTimer" type="Timer" parent="." unique_id=380445316]
 wait_time = 0.3
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=243282915]
+position = Vector2(10, -8)

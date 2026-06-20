@@ -19,6 +19,7 @@ var _knockback_velocity: Vector2
 
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var shooting_timer: Timer = $ShootingTimer
+@onready var marker: Marker2D = $Marker2D
 
 
 func _ready() -> void:
@@ -53,7 +54,7 @@ func _physics_process(delta: float) -> void:
 func _shoot() -> void:
 	var bullet: Node2D = bullet_scene.instantiate()
 
-	bullet.global_position = global_position
+	bullet.global_position = marker.global_position
 
 	get_parent().add_child(bullet)
 
