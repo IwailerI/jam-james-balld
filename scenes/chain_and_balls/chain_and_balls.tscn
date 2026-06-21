@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://6gkt5qcgg01x" path="res://assets/art/chain.png" id="2_4lu5f"]
 [ext_resource type="Texture2D" uid="uid://cofpnxpywrnwa" path="res://assets/art/balls.png" id="3_km36v"]
 [ext_resource type="PackedScene" uid="uid://dod8chnx3drsv" path="res://scenes/components/health_component/health_component.tscn" id="4_4lu5f"]
+[ext_resource type="Texture2D" uid="uid://jox2qkp5rh0v" path="res://assets/art/fly.png" id="5_m8ad4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5l1oh"]
 bounce = 0.7
@@ -14,10 +15,6 @@ region = Rect2(0, 0, 20, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ew8pg"]
 radius = 7.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5l1oh"]
-atlas = ExtResource("3_km36v")
-region = Rect2(22, 3, 14, 14)
 
 [node name="ChainAndBalls" type="Node2D" unique_id=429461000 groups=["chain_and_balls"]]
 y_sort_enabled = true
@@ -66,7 +63,7 @@ continuous_cd = 2
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=730560883]
-texture = SubResource("AtlasTexture_5l1oh")
+texture = ExtResource("5_m8ad4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1295743146]
 shape = SubResource("CircleShape2D_ew8pg")
