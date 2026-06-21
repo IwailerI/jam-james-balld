@@ -9,6 +9,7 @@
 [node name="Player" type="CharacterBody2D" unique_id=656747177 groups=["player"]]
 collision_mask = 4
 script = ExtResource("1_dovo2")
+closest_enemy_calc_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1288802053]
 shape = SubResource("CircleShape2D_x7p2l")

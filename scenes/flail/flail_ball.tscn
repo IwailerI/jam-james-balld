@@ -13,6 +13,7 @@ radius = 11.0
 
 [node name="FlailBall" type="Node2D" unique_id=1956772644 groups=["flailball"]]
 script = ExtResource("1_il477")
+follow_closest_enemy = true
 
 [node name="Line2D" type="Line2D" parent="." unique_id=450649165]
 z_index = -1

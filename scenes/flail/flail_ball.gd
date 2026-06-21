@@ -11,9 +11,12 @@ signal position_updated
 @export var radius: float
 @export var parent: FlailBall
 @export var damage: int = 50
+@export var follow_closest_enemy: bool = false
 
 var _rotation_angle: float = 0.0
 var _is_selected: bool = false
+var _has_target_to_follow: bool = false
+var _target_to_follow: Vector2
 
 @onready var _line: Line2D = $Line2D
 @onready var _sprite: Sprite2D = $Sprite2D
@@ -41,10 +44,26 @@ func _ready() -> void:
 		_sprite.hide()
 		_line.hide()
 
+	Player.get_instance().updated_closest_enemy.connect(_on_player_closest_enemy_updated)
+
 
 func _physics_process(_delta: float) -> void:
 	if parent == null:
 		position_updated.emit()
+
+
+func _process(_delta: float) -> void:
+	queue_redraw()
+
+
+func _set_rotation_angle() -> void:
+	if  not _has_target_to_follow:
+		var delta: float = get_physics_process_delta_time()
+		_rotation_angle += delta * rotation_speed
+		_rotation_angle = fposmod(_rotation_angle, TAU)
+	else:
+		print(_target_to_follow)
+		_rotation_angle = parent.global_position.angle_to_point(_target_to_follow)
 
 
 func _update_position() -> void:
@@ -52,9 +71,7 @@ func _update_position() -> void:
 		position_updated.emit()
 		return
 
-	var delta: float = get_physics_process_delta_time()
-	_rotation_angle += delta * rotation_speed
-	_rotation_angle = fposmod(_rotation_angle, TAU)
+	_set_rotation_angle()
 
 	global_position = parent.global_position + Vector2.from_angle(_rotation_angle) * radius
 	_line.points = PackedVector2Array([Vector2.ZERO, to_local(parent.global_position)])
@@ -89,7 +106,21 @@ func set_selected(v: bool) -> void:
 
 
 func _draw() -> void:
+	# print(_target_to_follow)
+	# draw_dashed_line(Vector2.ZERO, _target_to_follow - global_position, Color.RED, 2, true)
+	# print(_target_to_follow)
+	draw_circle(_target_to_follow - global_position, 16, Color.RED, false)
+
 	if not _is_selected:
 		return
 
 	draw_circle(Vector2.ZERO, 16, Color.BLUE, false)
+
+func _on_player_closest_enemy_updated(enemy: Node2D):
+	if enemy == null:
+		_has_target_to_follow = false
+	else:
+		_has_target_to_follow = true
+		_target_to_follow = enemy.global_position
+
+	# print(_has_target_to_follow, _target_to_follow)
