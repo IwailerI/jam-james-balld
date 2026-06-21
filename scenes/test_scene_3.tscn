@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://2str612gqg4n"]
+
+[ext_resource type="PackedScene" uid="uid://05li8lv1ril2" path="res://scenes/getting_over_it/chain_and_balls.tscn" id="1_wemst"]
+[ext_resource type="PackedScene" uid="uid://bwust5e26nd8q" path="res://scenes/game_manager/game_manager.tscn" id="2_svppf"]
+[ext_resource type="Script" uid="uid://ddc45eylgdqsm" path="res://resources/wave.gd" id="3_y2dlf"]
+[ext_resource type="Script" uid="uid://b0n51pgglqvsh" path="res://resources/wave_enemy_entry.gd" id="4_xmfm2"]
+[ext_resource type="PackedScene" uid="uid://gbsgy7a03y4m" path="res://scenes/enemy/enemy.tscn" id="5_ihh67"]
+[ext_resource type="PackedScene" uid="uid://bqmaaklxptuwx" path="res://scenes/shooting_enemy/shooting_enemy.tscn" id="6_45k7r"]
+
+[sub_resource type="Resource" id="Resource_rnaij"]
+script = ExtResource("4_xmfm2")
+enemy_scene = ExtResource("5_ihh67")
+metadata/_custom_type_script = "uid://b0n51pgglqvsh"
+
+[sub_resource type="Resource" id="Resource_h3xc6"]
+script = ExtResource("4_xmfm2")
+enemy_scene = ExtResource("6_45k7r")
+price = 10
+metadata/_custom_type_script = "uid://b0n51pgglqvsh"
+
+[sub_resource type="Resource" id="Resource_s36qc"]
+script = ExtResource("3_y2dlf")
+price_list = Array[ExtResource("4_xmfm2")]([SubResource("Resource_rnaij"), SubResource("Resource_h3xc6")])
+metadata/_custom_type_script = "uid://ddc45eylgdqsm"
+
+[sub_resource type="Resource" id="Resource_f4bkh"]
+script = ExtResource("3_y2dlf")
+price_list = Array[ExtResource("4_xmfm2")]([SubResource("Resource_rnaij"), SubResource("Resource_h3xc6")])
+budget = 500
+metadata/_custom_type_script = "uid://ddc45eylgdqsm"
+
+[node name="TestScene3" type="Node2D" unique_id=1835333024]
+
+[node name="ChainAndBalls" parent="." unique_id=429461000 instance=ExtResource("1_wemst")]
+
+[node name="GameManager" parent="." unique_id=559716171 instance=ExtResource("2_svppf")]
+waves = Array[ExtResource("3_y2dlf")]([SubResource("Resource_s36qc")])
+eternal_wave = SubResource("Resource_f4bkh")

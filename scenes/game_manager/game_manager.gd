@@ -38,7 +38,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _generate_spawn_position() -> Vector2:
-	return Player.get_instance().global_position + Vector2.from_angle(randf_range(0, 2 * PI)) * spawn_radius
+	return ChainAndBalls.get_instance().player.global_position + Vector2.from_angle(randf_range(0, 2 * PI)) * spawn_radius
 
 
 func _spawn_enemy(enemy_scene: PackedScene) -> void:
