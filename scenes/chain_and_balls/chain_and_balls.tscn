@@ -83,7 +83,6 @@ z_index = 4
 position = Vector2(50, 0)
 collision_layer = 8
 collision_mask = 5
-mass = 2.0
 physics_material_override = SubResource("PhysicsMaterial_5l1oh")
 continuous_cd = 2
 linear_damp_mode = 1
