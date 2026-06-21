@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://doh5v2chquosb" path="res://scenes/audio/gameplay_audio_player/gameplay_audio_player.tscn" id="8_45k7r"]
 [ext_resource type="AudioStream" uid="uid://cjp4lnpkqhuym" path="res://assets/audio/music/main_preloop.wav" id="9_f4bkh"]
 [ext_resource type="AudioStream" uid="uid://dsayevgimoglo" path="res://assets/audio/music/main_loop.wav" id="10_vk42m"]
+[ext_resource type="PackedScene" uid="uid://cav0jmryusucx" path="res://ui/menus/pause_menu/pause_menu.tscn" id="11_f4bkh"]
 
 [sub_resource type="Resource" id="Resource_rnaij"]
 script = ExtResource("4_xmfm2")
@@ -71,6 +72,10 @@ tile_map_data = PackedByteArray("AAADAAAAAAAEAAAAAAADAAEAAAADAAAAAAADAAIAAAACAAA
 tile_set = SubResource("TileSet_xmfm2")
 
 [node name="GameplayAudioPlayer" parent="." unique_id=614540304 instance=ExtResource("8_45k7r")]
+process_mode = 3
 stream = ExtResource("9_f4bkh")
 autoplay = true
+bus = &"Music"
 loop_stream = ExtResource("10_vk42m")
+
+[node name="PauseMenu" parent="." unique_id=840180984 instance=ExtResource("11_f4bkh")]
