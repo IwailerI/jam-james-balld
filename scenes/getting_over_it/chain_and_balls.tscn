@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://05li8lv1ril2"]
+
+[ext_resource type="Script" uid="uid://c3tldyvtw5e2d" path="res://scenes/getting_over_it/chain_and_balls.gd" id="1_gnoq6"]
+[ext_resource type="Texture2D" uid="uid://6gkt5qcgg01x" path="res://assets/art/chain.png" id="2_4lu5f"]
+[ext_resource type="Texture2D" uid="uid://cofpnxpywrnwa" path="res://assets/art/balls.png" id="3_km36v"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5l1oh"]
+bounce = 0.7
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v65r"]
+atlas = ExtResource("3_km36v")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ew8pg"]
+radius = 7.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l1oh"]
+atlas = ExtResource("3_km36v")
+region = Rect2(22, 3, 14, 14)
+
+[node name="ChainAndBalls" type="Node2D" unique_id=429461000]
+script = ExtResource("1_gnoq6")
+force_p = 500.0
+force_f = 500.0
+
+[node name="Chain" type="Line2D" parent="." unique_id=350565548]
+texture_repeat = 2
+points = PackedVector2Array(2, 0, 7, 0, 20, 4, 28, -7, 41, -1, 49, -1)
+width = 6.0
+texture = ExtResource("2_4lu5f")
+texture_mode = 1
+
+[node name="Flail" type="RigidBody2D" parent="." unique_id=1405984781]
+position = Vector2(50, 0)
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_5l1oh")
+continuous_cd = 2
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Flail" unique_id=1475941898]
+texture = SubResource("AtlasTexture_0v65r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flail" unique_id=477169546]
+shape = SubResource("CircleShape2D_ew8pg")
+
+[node name="Player" type="RigidBody2D" parent="." unique_id=49629014]
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_5l1oh")
+continuous_cd = 2
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=730560883]
+texture = SubResource("AtlasTexture_5l1oh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1295743146]
+shape = SubResource("CircleShape2D_ew8pg")
