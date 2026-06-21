@@ -1,3 +1,4 @@
+class_name ChainAndBalls
 extends Node2D
 
 @export var force_p: float = 100.0
@@ -5,7 +6,17 @@ extends Node2D
 
 @onready var flail: RigidBody2D = $Flail
 @onready var player: RigidBody2D = $Player
-@onready var line_2d: Line2D = $Line2D
+@onready var chain: Line2D = $Chain
+@onready var health_component: HealthComponent = $HealthComponent
+
+
+static func get_instance() -> ChainAndBalls:
+	var cnb: ChainAndBalls = (Engine.get_main_loop() as SceneTree).get_first_node_in_group(&"chain_and_balls")
+
+	if cnb == null:
+		push_error("no cnb :(")
+
+	return cnb
 
 
 func _physics_process(_delta: float) -> void:
@@ -21,9 +32,9 @@ func _physics_process(_delta: float) -> void:
 
 	_apply_constaint()
 
-	line_2d.points = PackedVector2Array([
-		line_2d.to_local(player.global_position),
-		line_2d.to_local(flail.global_position),
+	chain.points = PackedVector2Array([
+		chain.to_local(player.global_position),
+		chain.to_local(flail.global_position),
 	])
 
 

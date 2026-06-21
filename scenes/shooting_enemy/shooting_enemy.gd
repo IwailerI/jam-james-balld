@@ -11,7 +11,7 @@ extends CharacterBody2D
 
 @export var stop_distance: float = 100
 
-@onready var player := Player.get_instance()
+@onready var cnb := ChainAndBalls.get_instance()
 
 var _is_touching_player: bool = false
 var _time_left_to_dmg_tick: float = 0
@@ -28,12 +28,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not player:
-		return
+	var direction: Vector2 = (cnb.player.global_position - global_position).normalized()
 
-	var direction: Vector2 = (player.global_position - global_position).normalized()
-
-	if (player.global_position - global_position).length_squared() >= stop_distance * stop_distance:
+	if (cnb.player.global_position - global_position).length_squared() >= stop_distance * stop_distance:
 		velocity = direction * speed
 		if not shooting_timer.is_stopped():
 			shooting_timer.stop()

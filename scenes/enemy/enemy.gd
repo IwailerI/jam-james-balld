@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var damage_tick_interval: float = 0.5
 @export var knockback_fading: float = 300.0
 
-@onready var player := Player.get_instance()
+@onready var cnb := ChainAndBalls.get_instance()
 
 var _is_touching_player: bool = false
 var _time_left_to_dmg_tick: float = 0
@@ -25,12 +25,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not player:
-		return
+	var direction: Vector2 = (cnb.player.global_position - global_position).normalized()
 
-	var direction: Vector2 = (player.global_position - global_position).normalized()
-
-	if (player.global_position - global_position).length_squared() >= 1:
+	if (cnb.player.global_position - global_position).length_squared() >= 1:
 		velocity = direction * speed
 	else:
 		velocity = Vector2.ZERO
@@ -46,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	_time_left_to_dmg_tick -= delta
 
 	if _is_touching_player and _time_left_to_dmg_tick <= 0:
-		player.health_component.damage(damage)
+		cnb.health_component.damage(damage)
 		_time_left_to_dmg_tick += damage_tick_interval
 
 
