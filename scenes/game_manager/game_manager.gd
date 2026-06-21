@@ -6,8 +6,10 @@ extends Node
 @export var waves: Array[Wave]
 @export var eternal_wave: Wave
 @export var eternal_wave_budget_multiplier: float = 1.25
+@export var enemy_cap: int = 4096
 
 var _cur_wave_idx: int = 0
+var _cap_left: int
 
 var _cur_wave: Wave
 var _cur_wave_start_ticks: int
@@ -17,6 +19,7 @@ var _cur_spawn_entry_idx: int = 0
 
 func _ready() -> void:
 	_load_cur_wave()
+	_cap_left = enemy_cap
 
 
 func _physics_process(_delta: float) -> void:
@@ -32,7 +35,8 @@ func _physics_process(_delta: float) -> void:
 	if cur_ticks < _cur_wave_start_ticks + _spawn_entries[_cur_spawn_entry_idx].ticks_offset:
 		return
 
-	_spawn_enemy(_spawn_entries[_cur_spawn_entry_idx].enemy_scene)
+	if not _try_spawn_enemy(_spawn_entries[_cur_spawn_entry_idx].enemy_scene):
+		return
 
 	_cur_spawn_entry_idx += 1
 
@@ -41,10 +45,22 @@ func _generate_spawn_position() -> Vector2:
 	return ChainAndBalls.get_instance().player.global_position + Vector2.from_angle(randf_range(0, 2 * PI)) * spawn_radius
 
 
-func _spawn_enemy(enemy_scene: PackedScene) -> void:
+func _try_spawn_enemy(enemy_scene: PackedScene) -> bool:
+	if _cap_left <= 0:
+		return false
+
+	_cap_left -= 1
+
 	var node := enemy_scene.instantiate() as Node2D
 	node.global_position = _generate_spawn_position()
 	add_child(node)
+
+	node.tree_exited.connect(
+		func () -> void: enemy_cap += 1,
+		CONNECT_ONE_SHOT,
+	)
+
+	return true
 
 
 func _load_cur_wave() -> void:
