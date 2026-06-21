@@ -45,6 +45,14 @@ texture = SubResource("AtlasTexture_0v65r")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flail" unique_id=477169546]
 shape = SubResource("CircleShape2D_ew8pg")
 
+[node name="HurtBox" type="Area2D" parent="Flail" unique_id=1904783461]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flail/HurtBox" unique_id=1895632244]
+shape = SubResource("CircleShape2D_ew8pg")
+
 [node name="Player" type="RigidBody2D" parent="." unique_id=49629014]
 collision_mask = 13
 physics_material_override = SubResource("PhysicsMaterial_5l1oh")

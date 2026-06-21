@@ -1,13 +1,16 @@
 class_name ChainAndBalls
 extends Node2D
 
+
 @export var force_p: float = 100.0
 @export var force_f: float = 100.0
+@export var damage: int = 50
 
 @onready var flail: RigidBody2D = $Flail
 @onready var player: RigidBody2D = $Player
 @onready var chain: Line2D = $Chain
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var flail_hurt_box: Area2D = %HurtBox
 
 
 static func get_instance() -> ChainAndBalls:
@@ -22,6 +25,8 @@ static func get_instance() -> ChainAndBalls:
 func _ready() -> void:
 	health_component.died.connect(_on_died)
 	health_component.damaged.connect(_on_damaged)
+	flail_hurt_box.body_entered.connect(_on_flail_enemy_entered)
+	flail_hurt_box.area_entered.connect(_on_flail_enemy_entered)
 
 
 func _physics_process(_delta: float) -> void:
@@ -84,3 +89,11 @@ func _on_damaged(amount: int) -> void:
 
 func _on_died() -> void:
 	print("game over")
+
+func _on_flail_enemy_entered(enemy: Node2D) -> void:
+	if not enemy or not enemy.has_method("apply_knockback") or not enemy.get("health_component"):
+		return
+
+	enemy.health_component.damage(damage)
+
+	enemy.apply_knockback(flail.linear_velocity)
