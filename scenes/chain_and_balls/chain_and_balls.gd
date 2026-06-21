@@ -169,6 +169,9 @@ func _on_died() -> void:
 	print("game over")
 
 func _on_flail_enemy_entered(enemy: Node2D) -> void:
+	if flail.freeze:
+		return
+
 	if not enemy or not enemy.has_method("apply_knockback") or not enemy.get("health_component"):
 		return
 
