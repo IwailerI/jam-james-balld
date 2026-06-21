@@ -185,6 +185,6 @@ func _hide_animation() -> void:
 	print("viu")
 	player_animation.hide()
 
-func _udpate_nudity_state() -> void:
+func _udpate_nudity_state(amount: int) -> void:
 	player_sprite.frame_coords.x = clamp(int(3 - health_component.health /
 			(health_component.initial_health * (1.0/3.0))), 0, 2)
