@@ -192,7 +192,7 @@ func _hide_animation() -> void:
 func _udpate_nudity_state(_amount: int) -> void:
 	const CLOTHING_ELEM := preload("res://scenes/chain_and_balls/discarded_clothing.tscn")
 
-	var idx := clampi(int(remap(health_component.health, health_component.initial_health, 0, 0, 3), 0, 2)
+	var idx := clampi(int(remap(health_component.health, health_component.initial_health, 0, 0, 3)), 0, 2)
 	player_sprite.frame_coords.x = idx
 
 	if idx != _prev_clothing_idx and _prev_clothing_idx in [0, 1]:
@@ -200,6 +200,7 @@ func _udpate_nudity_state(_amount: int) -> void:
 		inst.global_position = player.global_position
 		inst.global_rotation = randf_range(0, TAU)
 		inst.linear_velocity = Vector2.UP * 100.0
+		inst.angular_velocity = randf_range(-TAU, TAU)
 		(inst.get_node("Sprite2D") as Sprite2D).frame = _prev_clothing_idx
 		add_child(inst)
 
