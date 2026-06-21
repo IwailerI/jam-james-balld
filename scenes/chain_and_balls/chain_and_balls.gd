@@ -71,8 +71,8 @@ func _physics_process(_delta: float) -> void:
 	_apply_constaint()
 
 	chain.points = PackedVector2Array([
-		chain.to_local(player.global_position),
 		chain.to_local(flail.global_position),
+		chain.to_local(player.global_position),
 	])
 
 	match flail_frozen_delta:
