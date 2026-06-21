@@ -5,11 +5,7 @@ extends Node2D
 
 @onready var flail: RigidBody2D = $Flail
 @onready var player: RigidBody2D = $Player
-# @onready var joint: DampedSpringJoint2D = $Joint
-
-
-func _ready() -> void:
-	player.add_collision_exception_with(flail)
+@onready var line_2d: Line2D = $Line2D
 
 
 func _physics_process(delta: float) -> void:
@@ -35,32 +31,10 @@ func _physics_process(delta: float) -> void:
 
 	_apply_constaint()
 
-
-func _process(delta: float) -> void:
-	queue_redraw()
-
-
-func _draw() -> void:
-	draw_dashed_line(to_local(player.global_position), to_local(flail.global_position), Color.ORANGE)
-
-	if player.freeze and not flail.freeze:
-		draw_dashed_line(to_local(get_global_mouse_position()), to_local(flail.global_position), Color.RED)
-	elif not player.freeze and flail.freeze:
-		var want_player := 2 * flail.global_position - get_global_mouse_position()
-		want_player = get_global_mouse_position()
-		player.apply_central_force((want_player - player.global_position).normalized() * force_p)
-		# want_player = get_global_mouse_position()
-		draw_dashed_line(to_local(want_player), to_local(player.global_position), Color.RED)
-	elif not player.freeze and not flail.freeze:
-		pass
-		# var center := (flail.global_position + player.global_position) * 0.5
-		# var want_player := 2 * center - get_global_mouse_position()
-		# draw_dashed_line(to_local(get_global_mouse_position()), to_local(flail.global_position), Color.RED)
-		# draw_dashed_line(to_local(want_player), to_local(player.global_position), Color.RED)
-
-
-	# draw_line(to_local(player.global_position), to_local(player.global_position + player.linear_velocity), Color.LIME)
-	# draw_line(to_local(flail.global_position), to_local(flail.global_position + flail.linear_velocity), Color.LIME)
+	line_2d.points = PackedVector2Array([
+		line_2d.to_local(player.global_position),
+		line_2d.to_local(flail.global_position),
+	])
 
 
 func _apply_constaint() -> void:

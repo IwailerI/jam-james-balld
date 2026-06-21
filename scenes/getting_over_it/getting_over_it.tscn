@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c3tldyvtw5e2d" path="res://scenes/getting_over_it/getting_over_it.gd" id="1_0v65r"]
 [ext_resource type="Texture2D" uid="uid://cofpnxpywrnwa" path="res://assets/art/balls.png" id="1_ew8pg"]
+[ext_resource type="Texture2D" uid="uid://6gkt5qcgg01x" path="res://assets/art/chain.png" id="2_5l1oh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5l1oh"]
 bounce = 0.7
@@ -23,6 +24,12 @@ region = Rect2(22, 3, 14, 14)
 script = ExtResource("1_0v65r")
 force_p = 500.0
 force_f = 500.0
+
+[node name="Line2D" type="Line2D" parent="." unique_id=350565548]
+texture_repeat = 2
+width = 6.0
+texture = ExtResource("2_5l1oh")
+texture_mode = 1
 
 [node name="Flail" type="RigidBody2D" parent="." unique_id=1405984781]
 position = Vector2(275, 116)
