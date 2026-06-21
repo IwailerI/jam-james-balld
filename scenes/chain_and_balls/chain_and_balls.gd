@@ -2,12 +2,12 @@ class_name ChainAndBalls
 extends Node2D
 
 const _GROUNDED_FLAIL := preload("res://scenes/chain_and_balls/grounded_flail_ball.tscn")
+const GroundedFlail := preload("res://scenes/chain_and_balls/grounded_flail_ball.gd")
 
 @export var force_p: float = 100.0
 @export var force_f: float = 100.0
 
-var _prev_flail_grounded: bool = false
-var _last_grounded_flail: Sprite2D
+var _last_grounded_flail: GroundedFlail
 
 @onready var flail: RigidBody2D = $Flail
 @onready var player: RigidBody2D = $Player
@@ -26,8 +26,7 @@ static func get_instance() -> ChainAndBalls:
 
 func _physics_process(_delta: float) -> void:
 	flail.freeze = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-	var flail_frozen_delta := int(flail.freeze) - int(_prev_flail_grounded)
-	_prev_flail_grounded = flail.freeze
+	var flail_frozen_delta := int(flail.freeze) - int(_last_grounded_flail != null)
 	player.freeze = Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
 
 	if player.freeze and not flail.freeze:
@@ -54,7 +53,7 @@ func _physics_process(_delta: float) -> void:
 			add_child(_last_grounded_flail)
 		-1: # just released
 			if is_instance_valid(_last_grounded_flail):
-				_last_grounded_flail.frame = 0
+				_last_grounded_flail.make_hollow()
 				var t := _last_grounded_flail.create_tween().chain()
 				t.tween_interval(2.0)
 				t.tween_property(_last_grounded_flail, "modulate:a", 0.0, 0.5)
