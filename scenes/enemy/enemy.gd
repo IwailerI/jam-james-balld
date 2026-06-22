@@ -152,10 +152,10 @@ func _on_death() -> void:
 		return
 	_labotomize()
 
-	var t := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	var t := create_tween()
 	t.tween_property(sprite, "global_rotation", _rand_sign() * TAU / 4, 1).as_relative().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 	t.chain().tween_interval(2.0)
-	t.chain().tween_property(self, "modulate:a", 0.0, 1)
+	t.chain().tween_property(self, "modulate:a", 0.0, 1).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 	t.chain().tween_callback(queue_free)
 
 
@@ -164,9 +164,9 @@ func _fall_into_a_hole() -> void:
 		return
 	_labotomize()
 
-	var t := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	var t := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	t.tween_property(self, "modulate:a", 0.0, 1)
-	t.parallel().tween_property(self, "global_position", Vector2.DOWN*10.0, 1).as_relative()
+	t.parallel().tween_property(self, "global_position", Vector2.DOWN*5.0, 1).as_relative()
 	t.parallel().tween_property(sprite, "global_rotation", _rand_sign() * TAU / 7, 1).as_relative()
 	t.chain().tween_callback(queue_free)
 
