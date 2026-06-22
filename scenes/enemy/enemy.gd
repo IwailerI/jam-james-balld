@@ -39,6 +39,7 @@ var _knockback_velocity: Vector2 #leftover velocity after
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hole_detector: Area2D = $HoleDetector
 @onready var navigation: NavigationAgent2D = $NavigationAgent2D
+@onready var sfx_player: SfxPlayer = $SfxPlayer
 
 var _initial_sprite_offset: Vector2
 var _initial_marker_offset: Vector2
@@ -165,10 +166,13 @@ func _fall_into_a_hole() -> void:
 		return
 	_labotomize()
 
+	var audio_stream := sfx_player.play_stream_from("fall_into_a_hole")
+
 	var t := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	t.tween_property(self, "modulate:a", 0.0, 1)
 	t.parallel().tween_property(self, "global_position", Vector2.DOWN*5.0, 1).as_relative()
 	t.parallel().tween_property(sprite, "global_rotation", _rand_sign() * TAU / 7, 1).as_relative()
+	t.parallel().tween_interval(audio_stream.get_length())
 	t.chain().tween_callback(queue_free)
 
 

@@ -4,6 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://dod8chnx3drsv" path="res://scenes/components/health_component/health_component.tscn" id="2_40wdo"]
 [ext_resource type="Texture2D" uid="uid://cl148x8e0tt8p" path="res://assets/art/all_enemies.png" id="3_40wdo"]
 [ext_resource type="Texture2D" uid="uid://ckrfbblmtvt6i" path="res://assets/art/shaddow.png" id="4_tjssy"]
+[ext_resource type="PackedScene" uid="uid://dw4q7rpb4mh6h" path="res://scenes/audio/sfx_player/sfx_player.tscn" id="5_gl05p"]
+[ext_resource type="AudioStream" uid="uid://ceutb3o44n6m6" path="res://assets/audio/sfx/enemy_fall/enemy_fall_1.wav" id="6_cwlon"]
+[ext_resource type="AudioStream" uid="uid://cv2jqwjaywpog" path="res://assets/audio/sfx/enemy_fall/enemy_fall_2.wav" id="7_nbhyu"]
 
 [sub_resource type="Animation" id="Animation_tjssy"]
 length = 0.001
@@ -51,6 +54,11 @@ region = Rect2(0, 12, 26, 32)
 height = 34.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjssy"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_13gj6"]
+streams_count = 2
+stream_0/stream = ExtResource("6_cwlon")
+stream_1/stream = ExtResource("7_nbhyu")
 
 [node name="Enemy" type="CharacterBody2D" unique_id=1871860269]
 collision_layer = 2
@@ -101,3 +109,8 @@ input_pickable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoleDetector" unique_id=289863296]
 shape = SubResource("CircleShape2D_tjssy")
 debug_color = Color(0, 0.2120524, 0.2536231, 0.41960785)
+
+[node name="SfxPlayer" parent="." unique_id=829347479 instance=ExtResource("5_gl05p")]
+audio_streams = Dictionary[String, AudioStream]({
+"fall_into_a_hole": SubResource("AudioStreamRandomizer_13gj6")
+})
