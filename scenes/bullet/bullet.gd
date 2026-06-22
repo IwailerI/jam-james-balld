@@ -1,11 +1,11 @@
 extends Area2D
 
 
-@onready var cnb := ChainAndBalls.get_instance()
-
 @export var speed: float = 120
 @export var damage: int = 10
+@export var knockback: float = 100.0
 
+@onready var cnb := ChainAndBalls.get_instance()
 @onready var life_timer: Timer = $LifeTimer
 
 var direction: Vector2
@@ -22,6 +22,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	position += direction * speed * delta
 
+
 func _on_body_entered(_area: Node2D) -> void:
 	cnb.health_component.damage(damage)
+	cnb.player.apply_central_impulse(global_position.direction_to(cnb.player.global_position) * knockback)
 	queue_free()
