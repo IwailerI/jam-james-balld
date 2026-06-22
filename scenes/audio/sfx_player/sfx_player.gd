@@ -10,7 +10,7 @@ var players: Dictionary[String, AudioStreamPlayer2D]
 func _ready() -> void:
 	var player_tmpl := $AudioStreamPlayer2D
 
-	player_tmpl.get_parent().remove_child(player_tmpl)
+	remove_child(player_tmpl)
 
 	for key: String in audio_streams.keys():
 		var player: AudioStreamPlayer2D = player_tmpl.duplicate()
