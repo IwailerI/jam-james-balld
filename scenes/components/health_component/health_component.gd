@@ -30,8 +30,8 @@ func damage(dmg: int) -> void:
 		return
 	health -= dmg
 	health = maxi(health, 0)
+	damaged.emit(dmg)
 	if is_dead(): died.emit()
-	else: damaged.emit(dmg)
 
 
 func is_dead() -> bool:

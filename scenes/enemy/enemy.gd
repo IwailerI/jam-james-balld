@@ -2,6 +2,9 @@ class_name Enemy
 extends CharacterBody2D
 
 
+signal got_lobotomized
+
+
 @export_group("Movement", "movement")
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "") var movement_enabled: bool = false
 @export var movement_speed: float = 30
@@ -134,6 +137,7 @@ func _on_velocity_computed(vel: Vector2) -> void:
 func _on_damaged(_amount: float) -> void:
 	var t := highlight_rect.create_tween().chain()
 	t.tween_property(highlight_rect, "color:a", 0, 0.125).from(0.75)
+	sfx_player.play_sound("damaged")
 
 
 func _randomize_animation() -> void:
@@ -145,8 +149,11 @@ func _labotomize() -> void:
 	if _was_lobotomized:
 		return
 
+	got_lobotomized.emit()
+
 	_was_lobotomized = true
 	animation_player.stop()
+	sfx_player.prepare_to_die()
 
 
 func _on_death() -> void:
@@ -164,15 +171,15 @@ func _on_death() -> void:
 func _fall_into_a_hole() -> void:
 	if _was_lobotomized:
 		return
-	_labotomize()
 
-	var audio_stream := sfx_player.play_stream_from("fall_into_a_hole")
+	sfx_player.play_sound("fall_into_a_hole")
+
+	_labotomize()
 
 	var t := create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO)
 	t.tween_property(self, "modulate:a", 0.0, 1)
 	t.parallel().tween_property(self, "global_position", Vector2.DOWN*5.0, 1).as_relative()
 	t.parallel().tween_property(sprite, "global_rotation", _rand_sign() * TAU / 7, 1).as_relative()
-	t.parallel().tween_interval(audio_stream.get_length())
 	t.chain().tween_callback(queue_free)
 
 
