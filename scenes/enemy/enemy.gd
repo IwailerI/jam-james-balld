@@ -37,6 +37,7 @@ var _knockback_velocity: Vector2 #leftover velocity after
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var highlight_rect: ColorRect = $Sprite2D/ColorRect
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var hole_detector: Area2D = $HoleDetector
 
 var _initial_sprite_offset: Vector2
 var _initial_marker_offset: Vector2
@@ -50,6 +51,11 @@ func _ready() -> void:
 		_initial_marker_offset = shooting_marker.position
 
 	_randomize_animation()
+
+	var do_fall := func (_body: Variant) -> void: _fall_into_a_hole()
+
+	hole_detector.body_entered.connect(do_fall, CONNECT_ONE_SHOT)
+	hole_detector.area_entered.connect(do_fall, CONNECT_ONE_SHOT)
 
 
 func _physics_process(delta: float) -> void:
@@ -122,3 +128,16 @@ func _on_damaged(_amount: float) -> void:
 func _randomize_animation() -> void:
 	animation_player.speed_scale = clampf(randfn(1, 0.2), 0.5, 1.5)
 	animation_player.seek(randf_range(0, animation_player.current_animation_length))
+
+
+func _fall_into_a_hole() -> void:
+	print("DEAD")
+	set_physics_process(false)
+	set_deferred(&"collision_layer", 0)
+	animation_player.stop()
+
+	var t := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	t.tween_property(self, "modulate:a", 0.0, 1)
+	t.parallel().tween_property(self, "global_position", Vector2.DOWN*10.0, 1).as_relative()
+	t.parallel().tween_property(sprite, "global_rotation", float(randi_range(0, 1) * 2 - 1) * TAU / 7, 1).as_relative()
+	t.finished.connect(queue_free)
