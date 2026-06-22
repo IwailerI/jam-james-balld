@@ -6,23 +6,35 @@ var _current_level: int
 
 
 func _init() -> void:
-	var f := FileAccess.open("res://scenes/files/levels.txt", FileAccess.READ)
+	var f := FileAccess.open("res://scenes/levels/levels.txt", FileAccess.READ)
 
 	if not f:
 		push_error("no levels.txt")
 		return
 
 	while not f.eof_reached():
-		var l := f.get_line()
+		var l := f.get_line().strip_edges()
+
+		if l.begins_with("#") or l == "":
+			continue
+
 		_levels.push_back(l)
+
 	f.close()
+
+	print("[GamaManager] discovered %d levels" % _levels.size())
 
 
 func load_level(id: int) -> void:
 	assert(1 <= id and id <= _levels.size(), "level id out of bounds")
-	_current_level = id - 1
+	_current_level = id
 
-	Transition.change_scene_path(_levels[_current_level])
+	print("[GamaManager] loading level %d (%s)" % [id, _levels[id-1]])
+
+	await Transition.change_scene_path(_levels[id-1])
+
+	if not get_tree().current_scene.is_node_ready():
+		await get_tree().current_scene.ready
 
 	for e: Exit in get_tree().get_nodes_in_group(&"exit"):
 		e.player_exited.connect(_next_level, CONNECT_ONE_SHOT)
@@ -36,8 +48,16 @@ func last_level() -> int:
 	return _levels.size()
 
 
+func current_level() -> int:
+	return _current_level
+
+
 func _next_level() -> void:
-	load_level(_current_level + 1)
+	if _current_level >= last_level():
+		await load_level(last_level())
+		return
+
+	await load_level(_current_level + 1)
 
 
 func _player_dead() -> void:
