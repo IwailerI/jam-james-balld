@@ -11,8 +11,7 @@ var _enemies_left: int = 0
 func _ready() -> void:
 	if win_condition_enemies:
 		for enemy: Enemy in get_tree().get_nodes_in_group(&"enemy"):
-			# TODO: replace with got_lobotomized
-			enemy.tree_exiting.connect(_on_enemy_death, CONNECT_ONE_SHOT)
+			enemy.got_lobotomized.connect(_on_enemy_death, CONNECT_ONE_SHOT)
 			_enemies_left += 1
 
 	body_entered.connect(func (_v: Variant) -> void: _check_player())
@@ -26,7 +25,7 @@ func _on_enemy_death() -> void:
 	_enemies_left = maxi(_enemies_left, 0)
 
 	if _enemies_left <= 0:
-		$Sprite2D.modulate = Color.LIME
+		($Sprite2D as Node2D).modulate = Color.LIME
 
 	_check_player()
 
