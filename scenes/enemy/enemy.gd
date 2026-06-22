@@ -41,11 +41,12 @@ var _knockback_velocity: Vector2 #leftover velocity after
 
 var _initial_sprite_offset: Vector2
 var _initial_marker_offset: Vector2
+var _was_lobotomized: bool = false
 
 
 func _ready() -> void:
 	health_component.damaged.connect(_on_damaged)
-	health_component.died.connect(queue_free)
+	health_component.died.connect(_on_death)
 	_initial_sprite_offset = sprite.offset
 	if is_instance_valid(shooting_marker):
 		_initial_marker_offset = shooting_marker.position
@@ -63,7 +64,7 @@ func _physics_process(delta: float) -> void:
 
 	velocity = Vector2.ZERO
 
-	if movement_enabled:
+	if movement_enabled and not _was_lobotomized:
 		var direction: Vector2 = (cnb.player.global_position - global_position).normalized()
 		if dist2 >= movement_stop_distance*movement_stop_distance:
 			velocity += direction * movement_speed
@@ -74,19 +75,20 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	sprite.flip_h = cnb.player.global_position.x < global_position.x
-	if sprite.flip_h:
-		sprite.offset = _initial_sprite_offset * Vector2(-1, 1)
-	else:
-		sprite.offset = _initial_sprite_offset
-
-	if is_instance_valid(shooting_marker):
+	if not _was_lobotomized:
+		sprite.flip_h = cnb.player.global_position.x < global_position.x
 		if sprite.flip_h:
-			shooting_marker.position = _initial_marker_offset * Vector2(-1, 1)
+			sprite.offset = _initial_sprite_offset * Vector2(-1, 1)
 		else:
-			shooting_marker.position = _initial_marker_offset
+			sprite.offset = _initial_sprite_offset
 
-	if melee_enabled:
+		if is_instance_valid(shooting_marker):
+			if sprite.flip_h:
+				shooting_marker.position = _initial_marker_offset * Vector2(-1, 1)
+			else:
+				shooting_marker.position = _initial_marker_offset
+
+	if melee_enabled and not _was_lobotomized:
 		if (
 			dist2 < melee_distance*melee_distance
 			and _melee_cooldown <= 0
@@ -99,7 +101,7 @@ func _physics_process(delta: float) -> void:
 		_melee_cooldown -= delta
 		_melee_cooldown = maxf(_melee_cooldown, 0.0)
 
-	if shooting_enabled:
+	if shooting_enabled and not _was_lobotomized:
 		if dist2 < shooting_distance*shooting_distance and _shooting_cooldown <= 0 and _knockback_velocity.is_zero_approx():
 			_shooting_cooldown = shooting_interval
 
@@ -130,14 +132,37 @@ func _randomize_animation() -> void:
 	animation_player.seek(randf_range(0, animation_player.current_animation_length))
 
 
-func _fall_into_a_hole() -> void:
-	print("DEAD")
-	set_physics_process(false)
-	set_deferred(&"collision_layer", 0)
+func _labotomize() -> void:
+	if _was_lobotomized:
+		return
+
+	_was_lobotomized = true
 	animation_player.stop()
+
+
+func _on_death() -> void:
+	if _was_lobotomized:
+		return
+	_labotomize()
+
+	var t := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
+	t.tween_property(sprite, "global_rotation", _rand_sign() * TAU / 4, 1).as_relative().set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	t.chain().tween_interval(2.0)
+	t.chain().tween_property(self, "modulate:a", 0.0, 1)
+	t.chain().tween_callback(queue_free)
+
+
+func _fall_into_a_hole() -> void:
+	if _was_lobotomized:
+		return
+	_labotomize()
 
 	var t := create_tween().set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_QUAD)
 	t.tween_property(self, "modulate:a", 0.0, 1)
 	t.parallel().tween_property(self, "global_position", Vector2.DOWN*10.0, 1).as_relative()
-	t.parallel().tween_property(sprite, "global_rotation", float(randi_range(0, 1) * 2 - 1) * TAU / 7, 1).as_relative()
-	t.finished.connect(queue_free)
+	t.parallel().tween_property(sprite, "global_rotation", _rand_sign() * TAU / 7, 1).as_relative()
+	t.chain().tween_callback(queue_free)
+
+
+func _rand_sign() -> float:
+	return float(randi_range(0, 1) * 2 - 1)
