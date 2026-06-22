@@ -76,7 +76,7 @@ min_hole_speed = 50.0
 [node name="HealthComponent" parent="." unique_id=1186933908 instance=ExtResource("4_4lu5f")]
 
 [node name="Chain" type="Line2D" parent="." unique_id=350565548]
-z_index = 3
+z_index = -1
 texture_repeat = 2
 points = PackedVector2Array(2, 0, 7, 0, 20, 4, 28, -7, 41, -1, 49, -1)
 width = 6.0
@@ -84,7 +84,6 @@ texture = ExtResource("2_4lu5f")
 texture_mode = 1
 
 [node name="Flail" type="RigidBody2D" parent="." unique_id=1405984781]
-z_index = 4
 position = Vector2(50, 0)
 collision_layer = 8
 collision_mask = 5
@@ -109,7 +108,6 @@ collision_mask = 2
 shape = SubResource("CircleShape2D_ew8pg")
 
 [node name="Player" type="RigidBody2D" parent="." unique_id=49629014]
-z_index = 4
 collision_mask = 13
 physics_material_override = SubResource("PhysicsMaterial_m8ad4")
 continuous_cd = 2

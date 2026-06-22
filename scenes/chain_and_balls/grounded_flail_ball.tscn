@@ -68,7 +68,7 @@ animations = [{
 }]
 
 [node name="GroundedFlailBall" type="Node2D" unique_id=1231403854]
-z_index = -1
+z_index = -2
 script = ExtResource("1_57cax")
 
 [node name="BG" type="Sprite2D" parent="." unique_id=269022617]
@@ -86,8 +86,6 @@ centered = false
 
 [node name="Animation" type="AnimatedSprite2D" parent="." unique_id=353232728]
 modulate = Color(0.84313726, 0.72156864, 0.6392157, 1)
-z_index = 4
-z_as_relative = false
 position = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_oxuwk")
 autoplay = "default"

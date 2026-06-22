@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c2iawpi0rhu1r"]
+
+[ext_resource type="Script" uid="uid://bgt125d5wu5bp" path="res://scenes/exit/exit.gd" id="1_wmb3t"]
+[ext_resource type="Texture2D" uid="uid://b3ibm6pneahdm" path="res://assets/art/exit_programmerart.png" id="2_tv5rl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wmb3t"]
+radius = 23.021729
+
+[node name="Exit" type="Area2D" unique_id=652828334 groups=["exit"]]
+collision_layer = 0
+monitorable = false
+script = ExtResource("1_wmb3t")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1266855190]
+modulate = Color(0.71174395, 0.008318606, 0.26882774, 1)
+texture = ExtResource("2_tv5rl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1034737586]
+shape = SubResource("CircleShape2D_wmb3t")

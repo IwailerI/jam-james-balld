@@ -62,6 +62,9 @@ func _ready() -> void:
 	navigation.max_speed = movement_speed
 	navigation.velocity_computed.connect(_on_velocity_computed)
 
+	set_physics_process(false)
+	($VisibleOnScreenNotifier2D as VisibleOnScreenNotifier2D).screen_entered.connect(set_physics_process.bind(true))
+
 
 func _physics_process(delta: float) -> void:
 	var dist2 := cnb.player.global_position.distance_squared_to(global_position)

@@ -73,6 +73,8 @@ folder_colors={
 
 settings_audio=""
 chain_and_balls="The chain and the balls"
+enemy=""
+exit=""
 
 [gui]
 
