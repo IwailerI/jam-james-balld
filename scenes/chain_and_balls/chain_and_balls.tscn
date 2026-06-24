@@ -123,6 +123,7 @@ position = Vector2(50, 0)
 collision_layer = 8
 collision_mask = 5
 physics_material_override = SubResource("PhysicsMaterial_5l1oh")
+freeze_mode = 1
 continuous_cd = 2
 linear_damp_mode = 1
 linear_damp = 0.001
@@ -145,6 +146,7 @@ shape = SubResource("CircleShape2D_ew8pg")
 [node name="Player" type="RigidBody2D" parent="." unique_id=49629014]
 collision_mask = 13
 physics_material_override = SubResource("PhysicsMaterial_m8ad4")
+freeze_mode = 1
 continuous_cd = 2
 linear_damp_mode = 1
 linear_damp = 0.6
