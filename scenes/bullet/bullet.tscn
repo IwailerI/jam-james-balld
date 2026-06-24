@@ -9,6 +9,7 @@ height = 10.0
 
 [node name="Bullet" type="Area2D" unique_id=1843918926]
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_83itf")
 metadata/_edit_group_ = true
 

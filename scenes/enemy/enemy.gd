@@ -26,6 +26,7 @@ var _melee_cooldown: float = 0.0
 @export var shooting_interval: float = 5.0
 @export var shooting_distance: float = 100.0
 @export var shooting_marker: Node2D
+@export_flags_2d_physics var shooting_visibility_check_mask: int = 1
 var _shooting_cooldown: float = 0.0
 
 
@@ -123,7 +124,7 @@ func _physics_process(delta: float) -> void:
 		_melee_cooldown = maxf(_melee_cooldown, 0.0)
 
 	if shooting_enabled and not _was_lobotomized:
-		if dist2 < shooting_distance*shooting_distance and _shooting_cooldown <= 0 and _knockback_velocity.is_zero_approx():
+		if dist2 < shooting_distance*shooting_distance and _shooting_cooldown <= 0 and _knockback_velocity.is_zero_approx() and _player_is_visible_from(shooting_marker.global_position):
 			_shooting_cooldown = shooting_interval
 
 			var inst := shooting_scene.instantiate() as Node2D
@@ -136,6 +137,15 @@ func _physics_process(delta: float) -> void:
 
 		_shooting_cooldown -= delta
 		_shooting_cooldown = maxf(_shooting_cooldown, 0.0)
+
+
+func _player_is_visible_from(origin: Vector2) -> bool:
+	var space_state := get_world_2d().direct_space_state
+	var query := PhysicsRayQueryParameters2D.create(origin, cnb.player.global_position, shooting_visibility_check_mask, [self.get_rid()])
+
+	var result := space_state.intersect_ray(query)
+
+	return !!result && result.collider == cnb.player
 
 
 func _on_velocity_computed(vel: Vector2) -> void:

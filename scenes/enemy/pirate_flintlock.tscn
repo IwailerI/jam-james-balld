@@ -14,7 +14,9 @@ melee_enabled = true
 melee_distance = 13.0
 shooting_enabled = true
 shooting_scene = ExtResource("2_r31ym")
+shooting_distance = 200.0
 shooting_marker = NodePath("ShootingPoint")
+shooting_visibility_check_mask = 5
 
 [node name="ShootingPoint" type="Marker2D" parent="." index="4" unique_id=349620297]
 position = Vector2(27, -24)

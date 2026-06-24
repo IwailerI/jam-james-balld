@@ -23,7 +23,8 @@ func _process(delta: float) -> void:
 	position += direction * speed * delta
 
 
-func _on_body_entered(_area: Node2D) -> void:
-	cnb.health_component.damage(damage)
-	cnb.player.apply_central_impulse(global_position.direction_to(cnb.player.global_position) * knockback)
+func _on_body_entered(area: Node2D) -> void:
+	if area == cnb.player:
+		cnb.health_component.damage(damage)
+		cnb.player.apply_central_impulse(global_position.direction_to(cnb.player.global_position) * knockback)
 	queue_free()
