@@ -74,6 +74,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_12rbl"]
 resource_name = "start_charge"
+length = 2.0
 step = 0.12
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -82,10 +83,10 @@ tracks/0/path = NodePath("FlipGroup/Sprite2D:rotation")
 tracks/0/interp = 4
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75, 1.88, 2.005, 2.13, 2.255, 2.38, 2.505, 2.63),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 6.2253923, 6.334362, 6.2398167, 6.4128966, 6.229472, 6.3855424, 6.237561]
+"values": [0.0, 6.2253923, 6.334362, 6.2398167, 6.4128966, 6.229472, 6.3855424, 6.237561, 6.2253923, 6.334362, 6.2398167, 6.4128966, 6.229472, 6.3855424, 6.237561, 6.2253923, 6.334362, 6.2398167, 6.4128966, 6.229472, 6.3855424, 6.237561]
 }
 
 [sub_resource type="Animation" id="Animation_40wdo"]
@@ -126,6 +127,7 @@ motion_mode = 1
 script = ExtResource("1_12rbl")
 walk_speed = 3000.0
 charge_speed = 700.0
+run_to_center_speed = 400.0
 
 [node name="SfxPlayer" parent="." unique_id=829347479 instance=ExtResource("2_ih6si")]
 audio_streams = Dictionary[String, AudioStream]({
@@ -170,7 +172,16 @@ position = Vector2(0, 1)
 texture = ExtResource("3_qdtli")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1118381485]
-visible = false
 position = Vector2(0, -36)
 rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_12rbl")
+
+[node name="HurtBox" type="Area2D" parent="." unique_id=1433769537]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=348563834]
+visible = false
+position = Vector2(0, -36)
+rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_12rbl")
