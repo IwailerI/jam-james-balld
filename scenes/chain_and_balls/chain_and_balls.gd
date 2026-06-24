@@ -261,12 +261,16 @@ func _udpate_nudity_state(_amount: int) -> void:
 
 	if idx != _prev_clothing_idx and _prev_clothing_idx in [0, 1]:
 		var inst := CLOTHING_ELEM.instantiate() as RigidBody2D
-		inst.global_position = player.global_position
+
 		inst.global_rotation = randf_range(0, TAU)
 		inst.linear_velocity = Vector2.UP * 100.0
 		inst.angular_velocity = randf_range(-TAU, TAU)
 		(inst.get_node("Sprite2D") as Sprite2D).frame = _prev_clothing_idx
-		add_child.call_deferred(inst)
+
+		(func () -> void:
+			add_child(inst)
+			inst.global_position = player.global_position
+		).call_deferred()
 
 	_prev_clothing_idx = idx
 
