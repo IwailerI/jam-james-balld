@@ -6,6 +6,8 @@ var _current_level: int
 
 
 func _init() -> void:
+	RenderingServer.set_default_clear_color("#3e3b38")
+
 	var f := FileAccess.open("res://scenes/levels/levels.txt", FileAccess.READ)
 
 	if not f:
