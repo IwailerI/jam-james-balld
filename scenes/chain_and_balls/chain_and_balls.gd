@@ -7,6 +7,7 @@ signal got_lobotomized
 
 const _GROUNDED_FLAIL := preload("res://scenes/chain_and_balls/grounded_flail_ball.tscn")
 const GroundedFlail := preload("res://scenes/chain_and_balls/grounded_flail_ball.gd")
+const _FAST_HIT_EFFECT := preload("res://scenes/chain_and_balls/fast_hit_effect.tscn")
 
 enum FlailVelocityBucket {SLOW, NORMAL, FAST}
 
@@ -198,8 +199,6 @@ func _on_died() -> void:
 func _get_flail_velocity_bucket() -> FlailVelocityBucket:
 	var flail_velocity_sqr := flail.linear_velocity.length_squared()
 
-	print(sqrt(flail_velocity_sqr))
-
 	if flail_velocity_sqr < flail_velocity_threshold_normal * flail_velocity_threshold_normal:
 		return FlailVelocityBucket.SLOW
 	elif flail_velocity_sqr < flail_velocity_threshold_fast * flail_velocity_threshold_fast:
@@ -234,6 +233,13 @@ func _on_flail_enemy_entered(enemy: Node2D) -> void:
 				damage = damage_fast
 
 		hc.damage(damage)
+
+	if bucket == FlailVelocityBucket.FAST:
+		var effect: AnimatedSprite2D = _FAST_HIT_EFFECT.instantiate()
+		add_child(effect)
+		effect.global_position = flail.global_position
+		effect.rotation = flail.linear_velocity.angle() - PI/2
+		effect.animation_finished.connect(effect.queue_free)
 
 
 func _calc_knockback(velocity: float) -> float:
