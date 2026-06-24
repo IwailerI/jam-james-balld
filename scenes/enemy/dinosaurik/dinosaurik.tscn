@@ -146,7 +146,7 @@ initial_health = 1000
 rect = Rect2(-114, -82, 223, 99)
 show_rect = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1884903029]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1884903029 groups=["boss"]]
 libraries/ = SubResource("AnimationLibrary_tjssy")
 autoplay = &"walk"
 blend_times = [&"charge", &"charge", 0.5, &"charge", &"charge_recovery", 0.5, &"charge", &"start_charge", 0.5, &"charge", &"walk", 0.5, &"charge_recovery", &"charge", 0.5, &"charge_recovery", &"charge_recovery", 0.5, &"charge_recovery", &"start_charge", 0.5, &"charge_recovery", &"walk", 0.5, &"start_charge", &"charge", 0.5, &"start_charge", &"charge_recovery", 0.5, &"start_charge", &"start_charge", 0.5, &"start_charge", &"walk", 0.5, &"walk", &"charge", 0.5, &"walk", &"charge_recovery", 0.5, &"walk", &"start_charge", 0.5, &"walk", &"walk", 0.5]

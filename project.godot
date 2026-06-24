@@ -76,6 +76,7 @@ settings_audio=""
 chain_and_balls="The chain and the balls"
 enemy=""
 exit=""
+boss=""
 
 [gui]
 
