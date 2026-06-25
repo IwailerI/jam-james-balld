@@ -253,6 +253,9 @@ func _rand_sign() -> float:
 
 
 func _shoot() -> void:
+	if _was_lobotomized:
+		return
+
 	var inst := shooting_scene.instantiate() as Node2D
 
 	get_parent().add_child(inst)
