@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dh3xwbtpk6iyy"]
+
+[ext_resource type="Script" uid="uid://cvv67p6gt2vhk" path="res://scenes/levels/level_chase/tanks.gd" id="1_ns050"]
+[ext_resource type="Texture2D" uid="uid://fb60r4h0b37h" path="res://assets/art/only_tank.png" id="1_t34vx"]
+
+[node name="Tanks" type="PathFollow2D" unique_id=1752207621]
+z_index = 100
+z_as_relative = false
+y_sort_enabled = true
+rotation = -0.0034347263
+script = ExtResource("1_ns050")
+
+[node name="Tank1" type="Sprite2D" parent="." unique_id=292773226 groups=["upright"]]
+position = Vector2(257.0397, -11.117249)
+rotation = 0.0034347263
+texture = ExtResource("1_t34vx")
+
+[node name="Tank2" type="Sprite2D" parent="." unique_id=814167851 groups=["upright"]]
+position = Vector2(86.18497, -53.704296)
+rotation = 0.0034347263
+texture = ExtResource("1_t34vx")
+
+[node name="Tank3" type="Sprite2D" parent="." unique_id=134152749 groups=["upright"]]
+position = Vector2(112.786385, 62.38776)
+rotation = 0.0034347263
+texture = ExtResource("1_t34vx")
+
+[node name="Death" type="Area2D" parent="." unique_id=1375521700]
+collision_layer = 0
+collision_mask = 11
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Death" unique_id=1994261051]
+polygon = PackedVector2Array(373.04245, -11.718773, -206.24904, 363.29373, -208.87561, -327.71936)
