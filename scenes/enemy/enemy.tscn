@@ -114,6 +114,7 @@ collision_layer = 2
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_4a83h")
+shooting_visibility_check_mask = 5
 knockback_enabled = true
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2060573813]
