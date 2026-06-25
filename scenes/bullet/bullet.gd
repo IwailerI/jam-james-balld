@@ -45,3 +45,8 @@ func _on_body_entered(area: Node2D) -> void:
 	cnb.health_component.damage(damage)
 	cnb.player.apply_central_impulse(global_position.direction_to(cnb.player.global_position) * knockback)
 	queue_free()
+
+
+func apply_knockback(v: Vector2) -> void:
+	_direction = v.normalized()
+	rotation = _direction.angle()
