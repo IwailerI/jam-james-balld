@@ -125,6 +125,7 @@ debug_start_upgrade={
 2d_physics/layer_3="Obstacle"
 2d_physics/layer_4="Flail"
 2d_physics/layer_5="Hole"
+2d_physics/layer_6="Dino Bone"
 
 [physics]
 
