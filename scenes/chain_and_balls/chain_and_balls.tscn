@@ -31,6 +31,9 @@ region = Rect2(0, 0, 20, 20)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ew8pg"]
 radius = 7.0
 
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ixy24"]
+b = Vector2(-50, 0)
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_m8ad4"]
 bounce = 0.7
 
@@ -98,6 +101,18 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flail/HurtBox" unique_id=1895632244]
+shape = SubResource("CircleShape2D_ew8pg")
+
+[node name="ChainBox" type="Area2D" parent="Flail" unique_id=1620189533]
+unique_name_in_owner = true
+collision_layer = 8
+collision_mask = 2
+
+[node name="ChainShape" type="CollisionShape2D" parent="Flail/ChainBox" unique_id=1152521099]
+unique_name_in_owner = true
+shape = SubResource("SegmentShape2D_ixy24")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flail/ChainBox" unique_id=865408831]
 shape = SubResource("CircleShape2D_ew8pg")
 
 [node name="Player" type="RigidBody2D" parent="." unique_id=49629014]

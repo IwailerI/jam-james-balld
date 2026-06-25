@@ -4,6 +4,7 @@ extends Node2D
 
 signal got_lobotomized
 
+const _MAX_DIST := 50.0
 const _GROUNDED_FLAIL := preload("res://scenes/chain_and_balls/grounded_flail_ball.tscn")
 const GroundedFlail := preload("res://scenes/chain_and_balls/grounded_flail_ball.gd")
 
@@ -43,6 +44,8 @@ var _was_lobotomized: bool = false
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var flail_hurt_box: Area2D = %HurtBox
 @onready var shadow: Sprite2D = %Shadow
+@onready var chain_box: Area2D = %ChainBox
+@onready var chain_shape: CollisionShape2D = %ChainShape
 
 @onready var player_sprite: Sprite2D = $Player/Sprite2D
 
@@ -66,6 +69,8 @@ func _ready() -> void:
 	health_component.healed.connect(_udpate_nudity_state)
 	flail_hurt_box.body_entered.connect(_on_flail_enemy_entered)
 	flail_hurt_box.area_entered.connect(_on_flail_enemy_entered)
+	chain_box.body_entered.connect(_on_chain_enemy_entered)
+	chain_box.area_entered.connect(_on_chain_enemy_entered)
 
 
 func _physics_process(_delta: float) -> void:
@@ -115,6 +120,8 @@ func _physics_process(_delta: float) -> void:
 		chain.to_local(player.global_position),
 	])
 
+	(chain_shape.shape as SegmentShape2D).b = chain_shape.to_local(player.global_position)
+
 	match flail_frozen_delta:
 		1: # just landed
 			if is_instance_valid(_last_grounded_flail):
@@ -144,16 +151,14 @@ func _physics_process(_delta: float) -> void:
 
 
 func _apply_constaint() -> void:
-	const MAX_DIST := 50.0
-
 	var delta := flail.global_position - player.global_position
 	var delta_len := delta.length()
 
-	if delta_len <= MAX_DIST:
+	if delta_len <= _MAX_DIST:
 		return
 
 	var dir := delta / delta_len
-	var error := delta_len - MAX_DIST
+	var error := delta_len - _MAX_DIST
 
 	var p_bias: float = 0.5
 
@@ -226,6 +231,19 @@ func _get_flail_velocity_bucket() -> FlailVelocityBucket:
 		return FlailVelocityBucket.FAST
 
 
+func _on_chain_enemy_entered(enemy: Node2D) -> void:
+	if _was_lobotomized:
+		return
+
+	# var knockback_force_mult: float = clampf(enemy.global_position.distance_to(player.global_position) / _MAX_DIST, 0, 1)
+	var dist: float = player.global_position.distance_to(flail.global_position)
+	var knockback_vec: Vector2 = lerp(player.linear_velocity, flail.linear_velocity, clampf(player.global_position.distance_to(enemy.global_position) / dist, 0, 1))
+
+	var knockback := knockback_vec.normalized() * _calc_knockback(knockback_vec.length())
+	if enemy.has_method("apply_knockback"):
+		enemy.apply_knockback(knockback)
+
+
 func _on_flail_enemy_entered(enemy: Node2D) -> void:
 	if flail.freeze:
 		return
@@ -233,8 +251,8 @@ func _on_flail_enemy_entered(enemy: Node2D) -> void:
 	var bucket := _get_flail_velocity_bucket()
 
 	var knockback := flail.linear_velocity.normalized() * _calc_knockback(flail.linear_velocity.length())
-	if enemy.has_method("apply_knockback"):
-		enemy.apply_knockback(knockback)
+	# if enemy.has_method("apply_knockback"):
+	# 	enemy.apply_knockback(knockback)
 
 	if enemy.has_method("apply_armour"):
 		enemy.apply_armour(flail, knockback)
