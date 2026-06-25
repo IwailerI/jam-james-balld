@@ -490,6 +490,7 @@ z_as_relative = false
 y_sort_enabled = true
 rotation = -0.0034347263
 script = ExtResource("1_ns050")
+speed = 60.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=437781962]
 libraries/ = SubResource("AnimationLibrary_ch6kn")

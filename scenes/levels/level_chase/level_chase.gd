@@ -1,5 +1,6 @@
 extends Node2D
 
+
 @onready var start_trigger: Area2D = %StartTrigger
 
 
