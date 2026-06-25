@@ -111,3 +111,6 @@ offset_top = -196.0
 offset_right = 1782.0
 offset_bottom = 240.0
 metadata/_edit_lock_ = true
+
+[node name="RegularLevelMusicManager" parent="." index="13" unique_id=880449124]
+start_music = false

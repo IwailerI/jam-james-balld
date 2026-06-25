@@ -22,6 +22,12 @@ var entries: Dictionary[String, MusicEntry] = {
 		(
 			"res://assets/audio/music/main_preloop_w_pause.wav",
 			"res://assets/audio/music/main_loop.wav"
+		),
+	"dino_boss":
+		MusicEntry.new
+		(
+			"res://assets/audio/music/dino_boss_preloop_w_pause.wav",
+			"res://assets/audio/music/dino_boss_loop.wav"
 		)
 }
 

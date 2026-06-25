@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://bgik4swsfbsx6" path="res://resources/tilesets/outer_walls.tres" id="7_bw430"]
 [ext_resource type="Script" uid="uid://clap501w1y3vd" path="res://scenes/tiles/variable_tilemap.gd" id="7_kaf6g"]
 [ext_resource type="TileSet" uid="uid://c3k8j3ka7re5h" path="res://resources/tilesets/tileset.tres" id="7_y3ot6"]
+[ext_resource type="Script" uid="uid://djmrj5pu8rwpf" path="res://scenes/audio/music_manager/regular_level_music_manager.gd" id="8_bw430"]
 [ext_resource type="PackedScene" uid="uid://c2iawpi0rhu1r" path="res://scenes/exit/exit.tscn" id="8_hghgy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cgfde"]
@@ -67,3 +68,6 @@ navigation_polygon = SubResource("NavigationPolygon_x3f8h")
 [node name="Exit" parent="." unique_id=652828334 instance=ExtResource("8_hghgy")]
 position = Vector2(268.55908, 4.986168)
 win_condition_enemies = true
+
+[node name="RegularLevelMusicManager" type="Node" parent="." unique_id=880449124]
+script = ExtResource("8_bw430")

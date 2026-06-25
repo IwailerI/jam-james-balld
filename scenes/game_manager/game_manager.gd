@@ -27,10 +27,6 @@ func _init() -> void:
 	print("[GamaManager] discovered %d levels" % _levels.size())
 
 
-func _ready() -> void:
-	_ensure_music.call_deferred()
-
-
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("restart_level"):
 		get_viewport().set_input_as_handled()
@@ -58,12 +54,6 @@ func load_level(id: int) -> void:
 	var cnb := ChainAndBalls.get_instance()
 	if not cnb.got_lobotomized.is_connected(_restart_level):
 		cnb.got_lobotomized.connect(_restart_level, CONNECT_ONE_SHOT)
-
-	_ensure_music.call_deferred()
-
-
-func _ensure_music() -> void:
-	MusicManager.ensure_playing("main")
 
 
 func last_level() -> int:
