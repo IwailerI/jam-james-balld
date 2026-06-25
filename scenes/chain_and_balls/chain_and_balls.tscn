@@ -106,7 +106,7 @@ physics_material_override = SubResource("PhysicsMaterial_m8ad4")
 freeze_mode = 1
 continuous_cd = 2
 linear_damp_mode = 1
-linear_damp = 0.6
+linear_damp = 0.5
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=730560883]

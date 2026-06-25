@@ -27,9 +27,9 @@ tile_size = Vector2i(48, 48)
 sources/0 = SubResource("TileSetAtlasSource_cgfde")
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x3f8h"]
-vertices = PackedVector2Array(192, 116, -308, 116, -308, -116, 192, -116, 1508, 116, 304, 116, 304, -116, 1508, -116)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-431, -244, -404, 219, 1716, 204, 1710, -204)])
+vertices = PackedVector2Array(1338.7734, -971.5469, 1434.1563, 1379.6172, -1515.2578, 1327.3594, -1428.7266, -1052.4219)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1448, -1073, -1536, 1347, 1455, 1400, 1358, -991)])
 source_geometry_mode = 2
 agent_radius = 20.0
 

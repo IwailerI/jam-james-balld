@@ -70,10 +70,12 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	player_sprite.global_rotation = 0
 
-	if player.global_position.x > flail.global_position.x:
-		player_sprite.flip_h = true
-	else:
-		player_sprite.flip_h = false
+
+	if not _was_lobotomized:
+		if player.global_position.x > flail.global_position.x:
+			player_sprite.flip_h = true
+		else:
+			player_sprite.flip_h = false
 
 	var p_over_hole := _is_over_hole(player.global_position)
 	var f_over_hole := _is_over_hole(flail.global_position)
@@ -91,7 +93,7 @@ func _physics_process(_delta: float) -> void:
 			flail.linear_velocity = Vector2.ZERO
 			player.apply_central_force((get_global_mouse_position() - player.global_position).normalized() * force_p)
 
-	if player.freeze:
+	if player.freeze and not _was_lobotomized:
 		player_sprite.frame_coords.y = 1
 		if not _player_frozen_state:
 			_player_frozen_state = true
@@ -104,7 +106,8 @@ func _physics_process(_delta: float) -> void:
 		player_sprite.frame_coords.y = 0
 		_player_frozen_state = false
 
-	_apply_constaint()
+	if not _was_lobotomized:
+		_apply_constaint()
 
 	chain.points = PackedVector2Array([
 		chain.to_local(flail.global_position),
@@ -178,6 +181,9 @@ func _labotomize() -> void:
 	if _was_lobotomized:
 		return
 
+	chain.hide()
+	flail.linear_damp += 0.1
+
 	got_lobotomized.emit()
 
 	_was_lobotomized = true
@@ -205,7 +211,7 @@ func _on_died() -> void:
 	player_sprite.texture = _DEAD_PLAYER_SPRITE
 	player_sprite.vframes = 1
 	player_sprite.hframes = 1
-	player_sprite.offset.y += 8
+	player_sprite.offset.y += 11
 
 
 func _get_flail_velocity_bucket() -> FlailVelocityBucket:
