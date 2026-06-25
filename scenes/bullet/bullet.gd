@@ -10,6 +10,7 @@ extends Area2D
 
 var _direction: Vector2
 var _initial_player_pos: Vector2
+var _initial_player_pos_valid: bool = true
 
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
@@ -33,7 +34,7 @@ func _process(delta: float) -> void:
 func _handle_obstacle_collision() -> void:
 	# ignore collisions with obstacles that happen before reaching the initial player position
 	# this is needed to avoid the bullet disappearing immediately if it is instantiated inside a collider
-	if _direction.dot(_initial_player_pos - global_position) <= 0:
+	if not _initial_player_pos_valid or _direction.dot(_initial_player_pos - global_position) <= 0:
 		queue_free()
 
 
@@ -51,5 +52,6 @@ func apply_knockback(v: Vector2) -> void:
 	if v.length_squared() < 100**2:
 		return
 
+	_initial_player_pos_valid = false
 	_direction = v.normalized()
 	rotation = _direction.angle()
