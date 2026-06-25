@@ -21,7 +21,7 @@ func _ready() -> void:
 	area_entered.connect(func (_v: Variant) -> void: _check_player())
 
 	_update_visual.call_deferred()
-	_check_player.call_deferred()
+	_check_player.call_deferred(true)
 
 
 func _on_enemy_death() -> void:
@@ -29,7 +29,7 @@ func _on_enemy_death() -> void:
 	_enemies_left = maxi(_enemies_left, 0)
 
 	_update_visual()
-	_check_player()
+	_check_player(true)
 
 
 func _update_visual() -> void:
@@ -37,8 +37,8 @@ func _update_visual() -> void:
 		($Sprite2D as Node2D).modulate = Color.LIME
 
 
-func _check_player() -> void:
-	if _enemies_left >= 0:
+func _check_player(silent: bool = false) -> void:
+	if _enemies_left >= 0 and not silent:
 		var inst: Label = label.duplicate()
 		add_child(inst)
 
