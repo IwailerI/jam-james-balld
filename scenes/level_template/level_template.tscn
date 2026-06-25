@@ -36,6 +36,7 @@ agent_radius = 20.0
 
 [node name="LevelTemplate" type="Node2D" unique_id=669825193]
 y_sort_enabled = true
+metadata/is_restartable = true
 
 [node name="PauseMenu" parent="." unique_id=840180984 instance=ExtResource("4_eng0m")]
 visible = false

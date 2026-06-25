@@ -4,7 +4,12 @@ extends CanvasLayer
 const DURATION: float = 0.5
 
 
+var _in_transition: bool = false
+
+
 func fade_in() -> void:
+	_in_transition = true
+
 	var bg: ColorRect = $ColorRect
 	bg.show()
 	var tween: Tween = create_tween()
@@ -13,6 +18,8 @@ func fade_in() -> void:
 
 
 func fade_out() -> void:
+	_in_transition = false
+
 	var bg: ColorRect = $ColorRect
 	var tween: Tween = create_tween()
 	tween.tween_property(bg, 'color', Color(0, 0, 0, 0), DURATION)
@@ -58,3 +65,7 @@ func reload_scene() -> void:
 	get_tree().reload_current_scene()
 	get_tree().paused = false
 	await fade_out()
+
+
+func is_mid_transition() -> bool:
+	return _in_transition

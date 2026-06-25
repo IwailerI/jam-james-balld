@@ -32,9 +32,13 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if get_tree().current_scene and get_tree().current_scene.name == "LevelTemplate" and event.is_action_pressed("restart_level"):
-		_restart_level()
+	if event.is_action_pressed("restart_level"):
 		get_viewport().set_input_as_handled()
+
+		var current: Node = get_tree().current_scene
+
+		if is_instance_valid(current) and current.get_meta("is_restartable", false) and not Transition.is_mid_transition():
+			_restart_level()
 
 
 func load_level(id: int) -> void:
