@@ -42,6 +42,9 @@ func _ready() -> void:
 	confirm_reset.confirmed.connect(Persistence.reset)
 
 	MusicManager.ensure_playing.call_deferred("main_menu")
+
+	print("Hard mode is %s" % ("ENABLED" if SettingsCfg.hard_mode() else "DISABLED"))
+	hard_mode_checkbox.set_pressed_no_signal(SettingsCfg.hard_mode())
 	hard_mode_checkbox.toggled.connect(SettingsCfg.set_hard_mode)
 
 
