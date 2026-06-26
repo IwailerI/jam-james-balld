@@ -46,6 +46,7 @@ visible = false
 z_index = -100
 texture_repeat = 1
 tile_set = SubResource("TileSet_ceqky")
+script = ExtResource("7_kaf6g")
 metadata/_edit_lock_ = true
 
 [node name="Tiles" type="TileMapLayer" parent="." unique_id=1105116259 groups=["navigation_polygon_source_geometry_group"]]
@@ -57,6 +58,7 @@ metadata/_edit_lock_ = true
 [node name="OuterWalls" type="TileMapLayer" parent="." unique_id=1196623470 groups=["navigation_polygon_source_geometry_group"]]
 y_sort_enabled = true
 tile_set = ExtResource("7_bw430")
+script = ExtResource("7_kaf6g")
 metadata/_edit_lock_ = true
 
 [node name="ChainAndBalls" parent="." unique_id=429461000 instance=ExtResource("6_aj1na")]

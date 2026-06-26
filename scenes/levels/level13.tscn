@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://pe7t0iijq1ff"]
 
-[ext_resource type="PackedScene" uid="uid://flppggcvx0w1" path="res://scenes/level_template/level_template.tscn" id="1_ipv6b"]
+[ext_resource type="PackedScene" uid="uid://c0e0cv6qlypg7" path="res://scenes/level_template/level_template.tscn" id="1_ipv6b"]
 [ext_resource type="Texture2D" uid="uid://buwit0d266j03" path="res://assets/art/walls_2.png" id="2_drmvt"]
 [ext_resource type="PackedScene" uid="uid://b0o8j4byt0v64" path="res://scenes/enemy/samurai_armoured.tscn" id="3_7a0hi"]
 [ext_resource type="PackedScene" uid="uid://xe8ao63ds45" path="res://scenes/enemy/pirate_barrel.tscn" id="3_v51bf"]

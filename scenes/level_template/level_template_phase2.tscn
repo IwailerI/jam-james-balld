@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c0e0cv6qlypg7"]
+
+[ext_resource type="PackedScene" uid="uid://flppggcvx0w1" path="res://scenes/level_template/level_template.tscn" id="1_gmtcs"]
+[ext_resource type="Texture2D" uid="uid://bkotgqgomp7qf" path="res://assets/art/floor_tile_2.png" id="2_o4eo2"]
+[ext_resource type="Texture2D" uid="uid://dw55uapkiiclo" path="res://assets/art/hole_phase2_tilemap.png" id="2_r1hme"]
+[ext_resource type="Texture2D" uid="uid://buwit0d266j03" path="res://assets/art/walls_2.png" id="3_o4eo2"]
+
+[node name="LevelTemplate" unique_id=669825193 instance=ExtResource("1_gmtcs")]
+
+[node name="Floor" parent="." index="1" unique_id=785946752]
+custom_textures = Dictionary[int, Texture2D]({
+0: ExtResource("2_o4eo2")
+})
+
+[node name="Tiles" parent="." index="2" unique_id=1105116259]
+custom_textures = Dictionary[int, Texture2D]({
+0: ExtResource("2_r1hme"),
+1: ExtResource("3_o4eo2")
+})

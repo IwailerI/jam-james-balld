@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://dknxkmlr4d21o"]
 
-[ext_resource type="PackedScene" uid="uid://flppggcvx0w1" path="res://scenes/level_template/level_template.tscn" id="1_f6q26"]
+[ext_resource type="PackedScene" uid="uid://c0e0cv6qlypg7" path="res://scenes/level_template/level_template_phase2.tscn" id="1_f6q26"]
 [ext_resource type="PackedScene" uid="uid://chmpihcr8huqx" path="res://scenes/enemy/samurai_basic.tscn" id="2_163xj"]
 [ext_resource type="PackedScene" uid="uid://1meomxvyd37m" path="res://scenes/enemy/caveman_spear.tscn" id="3_ycof1"]
 [ext_resource type="PackedScene" uid="uid://xe8ao63ds45" path="res://scenes/enemy/pirate_barrel.tscn" id="4_cuc04"]

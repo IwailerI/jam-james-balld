@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cve64hyf21l0g"]
 
-[ext_resource type="PackedScene" uid="uid://flppggcvx0w1" path="res://scenes/level_template/level_template.tscn" id="1_8piwq"]
+[ext_resource type="PackedScene" uid="uid://c0e0cv6qlypg7" path="res://scenes/level_template/level_template.tscn" id="1_8piwq"]
 [ext_resource type="PackedScene" uid="uid://b0o8j4byt0v64" path="res://scenes/enemy/samurai_armoured.tscn" id="2_un2t2"]
 [ext_resource type="PackedScene" uid="uid://v7lqtvnaboqq" path="res://scenes/enemy/caveman_club.tscn" id="3_8ipv8"]
 [ext_resource type="PackedScene" uid="uid://xe8ao63ds45" path="res://scenes/enemy/pirate_barrel.tscn" id="4_62n21"]

@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bfysu10nf88b5"]
 
-[ext_resource type="PackedScene" uid="uid://flppggcvx0w1" path="res://scenes/level_template/level_template.tscn" id="1_0ymhr"]
+[ext_resource type="PackedScene" uid="uid://c0e0cv6qlypg7" path="res://scenes/level_template/level_template.tscn" id="1_0ymhr"]
 [ext_resource type="PackedScene" uid="uid://1meomxvyd37m" path="res://scenes/enemy/caveman_spear.tscn" id="2_j587p"]
 [ext_resource type="PackedScene" uid="uid://pqs00v1i6hyq" path="res://scenes/enemy/ww1_rifle.tscn" id="3_xd2yy"]
 

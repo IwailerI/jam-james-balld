@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://soptqftmtcgp"]
 
-[ext_resource type="PackedScene" uid="uid://flppggcvx0w1" path="res://scenes/level_template/level_template.tscn" id="1_uwcyj"]
+[ext_resource type="PackedScene" uid="uid://c0e0cv6qlypg7" path="res://scenes/level_template/level_template.tscn" id="1_uwcyj"]
 [ext_resource type="PackedScene" uid="uid://cfpe6i2h63xow" path="res://scenes/enemy/ww1_machine_gun.tscn" id="2_3rta6"]
 [ext_resource type="PackedScene" uid="uid://chmpihcr8huqx" path="res://scenes/enemy/samurai_basic.tscn" id="3_ywpfb"]
 [ext_resource type="PackedScene" uid="uid://1meomxvyd37m" path="res://scenes/enemy/caveman_spear.tscn" id="4_4iysr"]

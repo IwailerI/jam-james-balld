@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://d4de38th6qt5n"]
 
-[ext_resource type="PackedScene" uid="uid://flppggcvx0w1" path="res://scenes/level_template/level_template.tscn" id="1_gv1mt"]
+[ext_resource type="PackedScene" uid="uid://c0e0cv6qlypg7" path="res://scenes/level_template/level_template_phase2.tscn" id="1_gv1mt"]
 [ext_resource type="PackedScene" uid="uid://dh3xwbtpk6iyy" path="res://scenes/levels/level_chase/tanks.tscn" id="2_0p2aw"]
 [ext_resource type="Script" uid="uid://c5a6i3c8mbcoe" path="res://scenes/levels/level_chase/level_chase.gd" id="2_xyl2k"]
 [ext_resource type="PackedScene" uid="uid://cfpe6i2h63xow" path="res://scenes/enemy/ww1_machine_gun.tscn" id="3_5jrt8"]
