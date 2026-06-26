@@ -39,20 +39,26 @@ position = Vector2(-85, -550)
 [node name="SamuraiArmoured2" parent="." index="8" unique_id=143081337 instance=ExtResource("2_un2t2")]
 position = Vector2(46, -547)
 
-[node name="CavemanClub2" parent="." index="9" unique_id=1089960586 instance=ExtResource("3_8ipv8")]
+[node name="SamuraiArmoured3" parent="." index="9" unique_id=239037550 instance=ExtResource("2_un2t2")]
+position = Vector2(915, 37)
+
+[node name="CavemanClub2" parent="." index="10" unique_id=1089960586 instance=ExtResource("3_8ipv8")]
 position = Vector2(1005, 17)
 
-[node name="PirateBarrel" parent="." index="10" unique_id=167671483 instance=ExtResource("4_62n21")]
+[node name="PirateBarrel" parent="." index="11" unique_id=167671483 instance=ExtResource("4_62n21")]
 position = Vector2(-96, 608)
 
-[node name="PirateFlintlock2" parent="." index="11" unique_id=75563977 instance=ExtResource("5_hrc0a")]
+[node name="PirateBarrel2" parent="." index="12" unique_id=1926956786 instance=ExtResource("4_62n21")]
+position = Vector2(-55, 707)
+
+[node name="PirateFlintlock2" parent="." index="13" unique_id=75563977 instance=ExtResource("5_hrc0a")]
 position = Vector2(49, 656)
 
-[node name="PirateFlintlock" parent="." index="12" unique_id=392701297 instance=ExtResource("5_hrc0a")]
+[node name="PirateFlintlock" parent="." index="14" unique_id=392701297 instance=ExtResource("5_hrc0a")]
 position = Vector2(-18, 310)
 
-[node name="CavemanClub3" parent="." index="13" unique_id=270672868 instance=ExtResource("3_8ipv8")]
+[node name="CavemanClub3" parent="." index="15" unique_id=270672868 instance=ExtResource("3_8ipv8")]
 position = Vector2(1033, 105)
 
-[node name="SamuraiBasic" parent="." index="14" unique_id=1381726232 instance=ExtResource("6_w4tgo")]
+[node name="SamuraiBasic" parent="." index="16" unique_id=1381726232 instance=ExtResource("6_w4tgo")]
 position = Vector2(-24, -324)
