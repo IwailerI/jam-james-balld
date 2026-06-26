@@ -32,6 +32,9 @@ func _physics_process(delta: float) -> void:
 
 
 func _kill_object(node: Node) -> void:
+	if node is Proxy:
+		node = node.to
+
 	if node == cnb.flail:
 		cnb.flail.apply_impulse(Vector2.ONE.rotated(rotation) * 300.0)
 		return

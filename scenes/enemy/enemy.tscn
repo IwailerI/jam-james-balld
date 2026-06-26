@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://mh35do01t4q" path="res://scenes/enemy/enemy.gd" id="1_4a83h"]
 [ext_resource type="PackedScene" uid="uid://dod8chnx3drsv" path="res://scenes/components/health_component/health_component.tscn" id="2_40wdo"]
+[ext_resource type="Script" uid="uid://cy64r64t6qx08" path="res://scenes/enemy/proxy.gd" id="2_so3kp"]
 [ext_resource type="Texture2D" uid="uid://cl148x8e0tt8p" path="res://assets/art/all_enemies.png" id="3_40wdo"]
 [ext_resource type="Texture2D" uid="uid://ckrfbblmtvt6i" path="res://assets/art/shaddow.png" id="4_tjssy"]
 [ext_resource type="PackedScene" uid="uid://dw4q7rpb4mh6h" path="res://scenes/audio/sfx_player/sfx_player.tscn" id="5_gl05p"]
@@ -13,6 +14,9 @@
 [ext_resource type="AudioStream" uid="uid://bky4uymo6j5vy" path="res://assets/audio/sfx/dash/dash_1.wav" id="12_dtxhd"]
 [ext_resource type="AudioStream" uid="uid://m4ei1mffpg1q" path="res://assets/audio/sfx/shoot/shoot.wav" id="13_dtxhd"]
 [ext_resource type="AudioStream" uid="uid://c4naj2igjl1uj" path="res://assets/audio/sfx/dash/dash_2.wav" id="13_so3kp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40wdo"]
+height = 34.0
 
 [sub_resource type="Animation" id="Animation_tjssy"]
 length = 0.001
@@ -96,9 +100,6 @@ _data = {
 atlas = ExtResource("3_40wdo")
 region = Rect2(0, 12, 26, 32)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_40wdo"]
-height = 34.0
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_tjssy"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dtxhd"]
@@ -117,13 +118,27 @@ streams_count = 2
 stream_0/stream = ExtResource("6_cwlon")
 stream_1/stream = ExtResource("7_nbhyu")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dtxhd"]
+radius = 7.0
+
 [node name="Enemy" type="CharacterBody2D" unique_id=1871860269 groups=["enemy"]]
-collision_layer = 2
-collision_mask = 6
+collision_layer = 256
+collision_mask = 132
 motion_mode = 1
 script = ExtResource("1_4a83h")
 shooting_visibility_check_mask = 5
 knockback_enabled = true
+
+[node name="Proxy" type="Area2D" parent="." unique_id=1482871041 node_paths=PackedStringArray("to")]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_so3kp")
+to = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Proxy" unique_id=1280122558]
+position = Vector2(0, -15)
+shape = SubResource("CapsuleShape2D_40wdo")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2060573813]
 rect = Rect2(-30, -46, 60, 62)
@@ -158,10 +173,6 @@ offset_right = 18.0
 offset_bottom = 5.0
 color = Color(1, 1, 1, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280122558]
-position = Vector2(0, -15)
-shape = SubResource("CapsuleShape2D_40wdo")
-
 [node name="Shadow" type="Sprite2D" parent="." unique_id=818558219]
 modulate = Color(0.105882354, 0.105882354, 0.105882354, 0.46666667)
 z_index = -1
@@ -185,3 +196,7 @@ audio_streams = Dictionary[String, AudioStream]({
 "fall_into_a_hole": SubResource("AudioStreamRandomizer_13gj6"),
 "shoot": ExtResource("13_dtxhd")
 })
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=879069919]
+position = Vector2(0, -3)
+shape = SubResource("CircleShape2D_dtxhd")

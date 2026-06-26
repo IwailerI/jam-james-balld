@@ -251,6 +251,9 @@ func _on_flail_enemy_entered(enemy: Node2D) -> void:
 	if flail.freeze:
 		return
 
+	if enemy is Proxy:
+		enemy = enemy.to
+
 	var bucket := _get_flail_velocity_bucket()
 
 	var knockback := flail.linear_velocity.normalized() * _calc_knockback(flail.linear_velocity.length())
