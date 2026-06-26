@@ -63,6 +63,7 @@ func _fill_level_select() -> void:
 		var inst := Button.new()
 		inst.text = str(i+1)
 		inst.disabled = (i > last_unlocked) and i != 0
+		inst.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 
 		inst.pressed.connect(GameManager.load_level.bind(i+1))
 
