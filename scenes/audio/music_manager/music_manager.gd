@@ -36,6 +36,7 @@ var _have_selected_entry: bool = false
 var _selected_entry_key: String
 var _selected_preloop: AudioStream
 var _selected_loop: AudioStream
+var _t_fade_to_stop: Tween
 
 
 func _ready() -> void:
@@ -52,6 +53,10 @@ func ensure_playing(key: String) -> void:
 	if key not in entries:
 		push_error("unknown key: '%s'" % key)
 		return
+
+	if _t_fade_to_stop != null:
+		_t_fade_to_stop.kill()
+		_fade_to_stop_end_cb()
 
 	if _have_selected_entry and _selected_entry_key == key:
 		return
@@ -73,16 +78,22 @@ func _do_loop() -> void:
 
 
 func fade_to_stop(fade_duration: float) -> void:
-	var t := _player.create_tween()
+	if _t_fade_to_stop != null:
+		_t_fade_to_stop.kill()
 
-	t.tween_property(_player, "volume_db", -50, fade_duration)
-	t.tween_callback(func() -> void:
-		_player.volume_db = 0
-		stop_music()
-	)
+	_t_fade_to_stop = _player.create_tween()
+
+	_t_fade_to_stop.tween_property(_player, "volume_db", -50, fade_duration)
+	_t_fade_to_stop.tween_callback(_fade_to_stop_end_cb)
 
 
-func stop_music() -> void:
+func _fade_to_stop_end_cb() -> void:
+	_player.volume_db = 0
+	_stop_music()
+	_t_fade_to_stop = null
+
+
+func _stop_music() -> void:
 	_player.stop()
 	_have_selected_entry = false
 	_selected_entry_key = ""
