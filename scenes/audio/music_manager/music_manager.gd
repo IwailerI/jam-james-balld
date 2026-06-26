@@ -38,6 +38,13 @@ var _selected_preloop: AudioStream
 var _selected_loop: AudioStream
 var _t_fade_to_stop: Tween
 
+var _fade_to_stop_volume_modifier: float = 0
+var _global_volume_modifier: float = 0
+
+
+func _init() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+
 
 func _ready() -> void:
 	_player = AudioStreamPlayer.new()
@@ -47,6 +54,14 @@ func _ready() -> void:
 	_player.bus = "Music"
 	_player.finished.connect(_do_loop)
 	_player.process_mode = Node.PROCESS_MODE_ALWAYS
+
+
+func _physics_process(_delta: float) -> void:
+	_player.volume_db = (_global_volume_modifier + _fade_to_stop_volume_modifier)
+
+
+func set_music_volume(new_volume_db: float) -> void:
+	_global_volume_modifier = new_volume_db
 
 
 func ensure_playing(key: String) -> void:
@@ -81,14 +96,14 @@ func fade_to_stop(fade_duration: float) -> void:
 	if _t_fade_to_stop != null:
 		_t_fade_to_stop.kill()
 
-	_t_fade_to_stop = _player.create_tween()
+	_t_fade_to_stop = create_tween()
 
-	_t_fade_to_stop.tween_property(_player, "volume_db", -50, fade_duration)
+	_t_fade_to_stop.tween_property(self, "_fade_to_stop_volume_modifier", -50, fade_duration)
 	_t_fade_to_stop.tween_callback(_fade_to_stop_end_cb)
 
 
 func _fade_to_stop_end_cb() -> void:
-	_player.volume_db = 0
+	_fade_to_stop_volume_modifier = 0
 	_stop_music()
 	_t_fade_to_stop = null
 
