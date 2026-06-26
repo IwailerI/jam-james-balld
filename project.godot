@@ -156,6 +156,7 @@ dialog_skip={
 2d_physics/layer_5="Hole"
 2d_physics/layer_6="Dino Bone"
 2d_physics/layer_7="Tank Death Trigger"
+2d_physics/layer_8="Ghost Wall"
 
 [physics]
 

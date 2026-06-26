@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://chmpihcr8huqx" path="res://scenes/enemy/samurai_basic.tscn" id="2_ay3we"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_lnhx7"]
-vertices = PackedVector2Array(2092, 220, 1460, 220, 1460, 160, 2092, 160, 2092, -76, 2572, -76, 2572, 76, 2092, 76, 2092, 80, 1460, 80, 1460, 76, 1136, -15.71875, 1460, -76, 1136, 15.71875, 1120.2813, 0, 1136, 76, 1136, -76, 1460, -80, 2092, -80, 288, -64, 416, -15.71875, 431.71875, 0, 416, 15.71875, 288, 64, 416, 64, 416, -64, 2092, -160, 1460, -160, 1460, -220, 2092, -220, 3180.0703, -871.72656, 3301.8203, 1231.4063, 2756, 260, 2756, -260, 2324, -260, 2324, -500, -596, 356, -548, 356, -548, 644, -1515.2422, 1326.5781, 2132, 644, 2132, 452, 2324, 452, 2324, 260, -1428.7266, -1052.2266, -596, -500)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 12, 4, 7, 10, 13, 14), PackedInt32Array(10, 15, 13), PackedInt32Array(11, 16, 12), PackedInt32Array(12, 17, 18, 4), PackedInt32Array(19, 20, 21, 22, 23), PackedInt32Array(22, 24, 23), PackedInt32Array(25, 20, 19), PackedInt32Array(26, 27, 28, 29), PackedInt32Array(30, 31, 32, 33), PackedInt32Array(33, 34, 35, 30), PackedInt32Array(36, 37, 38, 39), PackedInt32Array(40, 41, 42, 31), PackedInt32Array(42, 43, 32, 31), PackedInt32Array(44, 30, 35, 45), PackedInt32Array(39, 44, 45, 36), PackedInt32Array(31, 39, 38, 40)])
+vertices = PackedVector2Array(2092, 220, 1460, 220, 1460, 160, 2092, 160, 2092, -76, 2572, -76, 2572, 76, 2092, 76, 2092, 80, 1460, 80, 1460, 76, 1136, -15.71875, 1460, -76, 1136, 15.71875, 1120.2813, 0, 1136, 76, 1136, -76, 1460, -80, 2092, -80, 2092, -160, 1460, -160, 1460, -220, 2092, -220, 3180.0703, -871.72656, 3301.8203, 1231.4063, 2756, 260, 2756, -260, 2324, -260, 2324, -500, -596, 356, -548, 356, -548, 644, -1515.2422, 1326.5781, 2132, 644, 2132, 452, 2324, 452, 2324, 260, -1428.7266, -1052.2266, -596, -500)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(11, 12, 4, 7, 10, 13, 14), PackedInt32Array(10, 15, 13), PackedInt32Array(11, 16, 12), PackedInt32Array(12, 17, 18, 4), PackedInt32Array(19, 20, 21, 22), PackedInt32Array(23, 24, 25, 26), PackedInt32Array(26, 27, 28, 23), PackedInt32Array(29, 30, 31, 32), PackedInt32Array(33, 34, 35, 24), PackedInt32Array(35, 36, 25, 24), PackedInt32Array(37, 23, 28, 38), PackedInt32Array(32, 37, 38, 29), PackedInt32Array(24, 32, 31, 33)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-1448, -1073, -1536, 1347, 3323, 1251, 3199, -891)])
 source_geometry_mode = 2
 agent_radius = 20.0
@@ -48,3 +48,14 @@ position = Vector2(2018, 207)
 
 [node name="SamuraiBasic6" parent="." index="12" unique_id=1442558810 instance=ExtResource("2_ay3we")]
 position = Vector2(2207, 12)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="14" unique_id=1835327029 groups=["navigation_polygon_source_geometry_group"]]
+editor_description = "This is a botch to keep the bridge samurai from
+a) going to the start in the first place
+b) remaining on the starting platform if player runs past him"
+position = Vector2(363.95093, 11.533752)
+collision_layer = 128
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0" unique_id=137657597]
+polygon = PackedVector2Array(-135.95093, -128.53375, -157.95093, 140.46625, 242.04907, 177.46625, 156.04907, -114.53375)
