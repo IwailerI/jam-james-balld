@@ -25,6 +25,7 @@ visible = false
 visible = false
 
 [node name="SfxPlayer" parent="." index="5" unique_id=829347479]
+position = Vector2(180, 169)
 audio_streams = Dictionary[String, AudioStream]({
 "char": ExtResource("3_et6yg")
 })

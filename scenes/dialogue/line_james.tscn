@@ -33,6 +33,8 @@ stretch_mode = 2
 
 [node name="SfxPlayer" parent="." unique_id=829347479 instance=ExtResource("3_s47pb")]
 unique_name_in_owner = true
+position = Vector2(458, 169)
 audio_streams = Dictionary[String, AudioStream]({
+"": null,
 "char": ExtResource("4_3j3n7")
 })
