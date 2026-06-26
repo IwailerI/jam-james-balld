@@ -54,6 +54,14 @@ texture_margin_right = 32.0
 texture_margin_bottom = 6.0
 region_rect = Rect2(0, 0, 78, 17)
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ggasa"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i6at2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3f256"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1vg7w"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3pp72"]
 texture = ExtResource("6_n83um")
 texture_margin_left = 6.0
@@ -114,6 +122,10 @@ Button/styles/normal = SubResource("StyleBoxTexture_0ecif")
 Button/styles/pressed = SubResource("StyleBoxTexture_hvkdh")
 CheckBox/icons/checked = ExtResource("5_2xv77")
 CheckBox/icons/unchecked = ExtResource("5_nn1i8")
+CheckBox/styles/hover = SubResource("StyleBoxEmpty_ggasa")
+CheckBox/styles/hover_pressed = SubResource("StyleBoxEmpty_i6at2")
+CheckBox/styles/normal = SubResource("StyleBoxEmpty_3f256")
+CheckBox/styles/pressed = SubResource("StyleBoxEmpty_1vg7w")
 HSlider/icons/grabber = ExtResource("5_exttd")
 HSlider/icons/grabber_highlight = ExtResource("6_c8sri")
 HSlider/styles/grabber_area = SubResource("StyleBoxTexture_3pp72")
