@@ -11,6 +11,6 @@ Game came out a little on the hard side, but still includes a harder mode for th
 
 All assets were made by the team during the game jam.
 
-Playable game builds are available on (Itch.io)[https://wwailer.itch.io/james-balld].
+Playable game builds are available on [Itch.io](https://wwailer.itch.io/james-balld).
 
-Made for (The Very Serious Juniper Dev Game Jam)[https://itch.io/jam/theveryseriousjuniperdevgamejam].
+Made for [The Very Serious Juniper Dev Game Jam](https://itch.io/jam/theveryseriousjuniperdevgamejam).
