@@ -7,6 +7,7 @@ var _player_camera: Camera2D
 @onready var health_bar: ProgressBar = %HealthBar
 @onready var dinosaurik: Dinosaurik = %Dinosaurik
 @onready var boss_ui: Control = %BossUI
+@onready var fake_wall: StaticBody2D = $FakeWall
 
 
 func _ready() -> void:
@@ -23,6 +24,8 @@ func _on_dino_damaged(_amount: int) -> void:
 
 
 func _on_boss_started() -> void:
+	fake_wall.show()
+	fake_wall.process_mode = Node.PROCESS_MODE_INHERIT
 	boss_ui.show()
 
 	MusicManager.ensure_playing("dino_boss")

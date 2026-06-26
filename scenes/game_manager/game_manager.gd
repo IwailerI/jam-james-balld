@@ -10,7 +10,7 @@ var _current_level: int
 
 
 func _init() -> void:
-	RenderingServer.set_default_clear_color("#3e3b38")
+	RenderingServer.set_default_clear_color("#141d1f")
 
 	var f := FileAccess.open("res://scenes/levels/levels.txt", FileAccess.READ)
 
