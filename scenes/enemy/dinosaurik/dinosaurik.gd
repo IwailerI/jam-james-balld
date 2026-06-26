@@ -68,6 +68,7 @@ var _was_on_screen: bool = false
 @onready var flip_group: Node2D = $FlipGroup
 @onready var hurtbox: Area2D = $HurtBox
 @onready var damage_flash: ColorRect = %DamageFlash
+@onready var sfx_player: SfxPlayer = $SfxPlayer
 
 
 func _ready() -> void:
@@ -86,6 +87,7 @@ func _ready() -> void:
 		inst.position = position
 		get_parent().add_child.call_deferred(inst)
 		queue_free()
+		sfx_player.prepare_to_die()
 	)
 
 
@@ -263,10 +265,8 @@ func _force_play(anim: StringName) -> void:
 	animation_player.play(anim, 0.5)
 
 
-
 func _get_player_pos() -> Vector2:
 	return cnb.player.global_position
-
 
 
 func _get_random_arena_pos() -> Vector2:
@@ -293,10 +293,9 @@ func _hurtbox_body_entered(node: Node2D) -> void:
 	cnb.player.apply_central_impulse(dir * contact_knockback)
 
 
-
 func _on_damaged(_amount: int) -> void:
 	damage_flash.create_tween().chain().tween_property(damage_flash, "color:a", 0, 0.3).from(0.75)
-	# TODO: SOUND!
+	sfx_player.play_sound("damaged")
 
 
 func apply_armour(flail: RigidBody2D, _knockback: Vector2) -> void:
