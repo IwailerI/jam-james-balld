@@ -35,6 +35,5 @@ stretch_mode = 2
 unique_name_in_owner = true
 position = Vector2(458, 169)
 audio_streams = Dictionary[String, AudioStream]({
-"": null,
 "char": ExtResource("4_3j3n7")
 })
