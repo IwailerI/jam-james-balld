@@ -82,6 +82,7 @@ chain_and_balls="The chain and the balls"
 enemy=""
 exit=""
 boss=""
+navigation_polygon_source_geometry_group=""
 
 [gui]
 

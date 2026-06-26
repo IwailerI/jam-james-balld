@@ -12,7 +12,7 @@ offset = Vector2(0, -28)
 hframes = 8
 vframes = 2
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1260665613]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1260665613 groups=["navigation_polygon_source_geometry_group"]]
 collision_layer = 4
 collision_mask = 0
 
