@@ -1,11 +1,7 @@
 [gd_scene format=3 uid="uid://d1ktnomh5f7r8"]
 
 [ext_resource type="Script" uid="uid://clhpeda7lk04e" path="res://scenes/dialogue/dialog_line.gd" id="1_bdwda"]
-[ext_resource type="Texture2D" uid="uid://bhjs70u74xda4" path="res://assets/art/faces.png" id="2_qsbg4"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qsbg4"]
-atlas = ExtResource("2_qsbg4")
-region = Rect2(0, 0, 22, 22)
+[ext_resource type="Texture2D" uid="uid://367220n2pkao" path="res://assets/art/Balld_JamesBalld.png" id="2_qsbg4"]
 
 [node name="LineJames" type="HBoxContainer" unique_id=981304959]
 offset_right = 35.0
@@ -30,5 +26,5 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=355498445]
 layout_mode = 2
-texture = SubResource("AtlasTexture_qsbg4")
+texture = ExtResource("2_qsbg4")
 stretch_mode = 2

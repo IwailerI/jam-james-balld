@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://owmdct846lvi"]
 
 [ext_resource type="Script" uid="uid://b6jknu2xf4lfi" path="res://scenes/dialogue/dialogue.gd" id="1_cpw6a"]
-[ext_resource type="Texture2D" uid="uid://ds7ca4q63k5ui" path="res://assets/art/itch_logo.png" id="4_vh7tq"]
+[ext_resource type="Texture2D" uid="uid://dqh14gq5x5sj" path="res://assets/art/better_call_James_Balld.png" id="2_esu7l"]
 
 [node name="Dialogue" type="PanelContainer" unique_id=1859713965]
 anchors_preset = 15
@@ -43,5 +43,5 @@ size_flags_vertical = 3
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=570479733]
 layout_mode = 2
-texture = ExtResource("4_vh7tq")
+texture = ExtResource("2_esu7l")
 stretch_mode = 3
