@@ -140,7 +140,7 @@ audio_streams = Dictionary[String, AudioStream]({
 })
 
 [node name="HealthComponent" parent="." unique_id=1186933908 instance=ExtResource("8_hyul6")]
-initial_health = 1000
+initial_health = 2000
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=2060573813]
 rect = Rect2(-114, -82, 223, 99)
